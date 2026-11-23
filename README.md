@@ -3,6 +3,9 @@
 > **中央課程與教學輔導諮詢教師 ｜ 桃園市數學輔導團中興國中 李慧玲老師 主講**  
 > 專案結合 **生成式 AI (Gemini Canvas)**、**自主學習評量 APP** 與 **Google 雲端試算表 (Google Apps Script, GAS)**，打造零成本、免 API Key 的即時智慧教學評量與學習歷程追蹤系統。
 
+🌐 **線上互動分類查詢系統**：[https://yaoshuchin.github.io/1151123-math-ai-app-gas/](https://yaoshuchin.github.io/1151123-math-ai-app-gas/)  
+🔑 **系統存取密碼**：`049`
+
 ---
 
 ## 🌟 專案成果亮點
