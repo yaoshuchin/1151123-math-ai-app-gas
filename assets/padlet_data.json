@@ -1,0 +1,671 @@
+{
+  "board": {
+    "title": "115南投縣素養研習_Apps Script部署 https://reurl.cc/NOKz9k",
+    "url": "https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy",
+    "shortUrl": "https://reurl.cc/NOKz9k",
+    "creator": {
+      "name": "李慧玲",
+      "profileUrl": "https://padlet.com/li11090021_1_1"
+    },
+    "totalPosts": 31,
+    "columns": [
+      "講義",
+      "互動式評量",
+      "部署",
+      "成果_互動式評量",
+      "成果_部署"
+    ]
+  },
+  "sections": [
+    {
+      "column": "講義",
+      "postCount": 3,
+      "posts": [
+        {
+          "index": 0,
+          "title": "研習封面與 QR Code",
+          "author": "李慧玲",
+          "date": "24天 之前",
+          "content": "QR Code & Apps Script 研習封面圖片",
+          "links": [
+            {
+              "type": "wish_attachment",
+              "url": "https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/LNV1Q7KzPnwrQmq3"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_0_card",
+              "type": "card_image",
+              "original_url": "https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/a1e07c84e846507cd8a13728290fd949/__200.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNsw8mhymxTBsXZmzGW2Be-WGfyl9P67BgrjEauMAwkrSohS2X35tJauIQocFxeu3GzWwpa47ija76hKnarYbL0u9NaOnd3QtwF9WJ4inoU8gJg==",
+              "local_path": "assets/padlet/post_0_card.png"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "title": "講義",
+          "author": "李慧玲",
+          "date": "24天 之前",
+          "content": "115 國中數學領域 數位科技推動自主學習探究",
+          "links": [
+            {
+              "type": "pdf_attachment",
+              "label": "PDF: 115",
+              "url": "https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/PR3NWxyr65P9ab0O"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_1_thumb",
+              "type": "pdf_thumbnail",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/2f71ea2a4accc376e3d90383dcfbaa1f367068f0/ccbe6c7ec89cdf8fd2caaac4fe9aed0c-h-1e2e6de5b92e64159456d09b805cfbc4.png",
+              "local_path": "assets/padlet/post_1_thumb.png"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "title": "研習照片",
+          "author": "李慧玲",
+          "date": "24天 之前",
+          "content": "現場研習照片紀錄",
+          "links": [
+            {
+              "type": "wish_attachment",
+              "url": "https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/PVKBQO03BvjrZj5x"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_2_photo",
+              "type": "photo_attachment",
+              "original_url": "https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/859edd4a7d73670225563393bb1066d3/S__53133318.jpg?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNsxRbXeLqClGK_1LuQ1BXnEDE8duZ-mJTPviXFPE2L4zcIpbxueFLmUTG_Pv3xzfkmuG0jMyydOOlOwplXUkHopObiSQrjl5TV4Pscx-1ycV643rgNax_IxFYaGihnAYVHs=",
+              "local_path": "assets/padlet/post_2_photo.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "column": "互動式評量",
+      "postCount": 3,
+      "posts": [
+        {
+          "index": 3,
+          "title": "不只老鼠會打洞",
+          "author": "李慧玲",
+          "date": "12天 之前",
+          "content": "互動評量範例：不只老鼠會打洞",
+          "links": [
+            {
+              "type": "gas_app",
+              "url": "https://script.google.com/macros/s/AKfycbzoSwkkp3_jgehU5h8K1ilQBprDvrBXJ6DW5fyUedkFglbhCRf_LEfMtZn6WE6xfcOhCg/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_3_card",
+              "type": "card_image",
+              "original_url": "https://padlet-uploads-usc1.storage.googleapis.com/1546636446/f291cdc0bb30752289d351e11b7b73d8/image.png",
+              "local_path": "assets/padlet/post_3_card.png"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "title": "解一元一次方程式",
+          "author": "李慧玲",
+          "date": "24天 之前",
+          "content": "Gemini - direct access to Google AI\nhttps://share.gemini.google/DCEt33VRtyI2",
+          "links": [
+            {
+              "type": "gemini_share",
+              "url": "https://gemini.google.com/share/eccbef8f5382?skid=5442deed-a7ff-4e41-a36f-a04cf218f197"
+            },
+            {
+              "type": "gemini_share_short",
+              "url": "https://share.gemini.google/DCEt33VRtyI2"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_4_card",
+              "type": "card_image",
+              "original_url": "https://padlet-uploads-usc1.storage.googleapis.com/1546636446/2486c0a77bdd977ab2c56041877ed041/image.png",
+              "local_path": "assets/padlet/post_4_card.png"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "title": "評量提示詞",
+          "author": "李慧玲",
+          "date": "24天 之前",
+          "content": "你是一個專業的國中數學教師，要設計一個單元的數學評量活動，單元為：解一元一次方程式。首頁要設計者：老李小妹老師，並有學生可以輸入：班級、座號、姓名。題目分為三個關卡，基礎關：5題、進階題：3題、挑戰關：2題，共10題，每題10分，合計100分。每道題目旁要有一個可以點選計算紙，提供學生計算。三個關卡都完成後，要呈現學生在各關卡的答題情況及分數。學生第二次重做時，題目難度一樣，但是題目要不一樣。不要用latex語法，數學公式：請在網頁中使用 KaTeX（或 MathJax）來渲染所有數學公式。確保當頁面載入或數值變動時，數學符號能夠正確且美觀地顯示為標準數學排版，或請使用 display math 格式以確保數學公式的清晰可讀與排版整齊， 最後請用html格式輸出。並使用「響應式網頁設計」(Responsive Web Design) 以及「萬用輸入支援」",
+          "links": [],
+          "images": []
+        }
+      ]
+    },
+    {
+      "column": "部署",
+      "postCount": 3,
+      "posts": [
+        {
+          "index": 6,
+          "title": "貼上後端大腦程式碼_code.gs 的用途 & 建立前端互動網頁 Index.html 的功能",
+          "author": "李慧玲",
+          "date": "12天 之前",
+          "content": "code.gs 的用途：不僅負責儲存資料，還包含了「自動批改選擇題邏輯」以及反向去試算表「查詢老師回饋」的搜尋功能。\n請將 Apps Script 預設的程式碼清空，貼上📁Code.gs\nIndex.html 的功能：透過 Mock API 的設計，這段語法就算您直接存成 HTML 檔在電腦上雙擊打開，都能正常呈現模擬資料與動畫！放到 GAS 部署後則會自動轉換為呼叫真實後端資料。\n在左側點擊 + ➔ HTML，命名為 Index，清空預設內容並貼上 🧑💻Index",
+          "links": [
+            {
+              "type": "wish_attachment",
+              "url": "https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/jpoxajRMpGA4abPE"
+            },
+            {
+              "type": "google_doc_codegs",
+              "label": "📁 Code.gs",
+              "url": "https://docs.google.com/document/d/1wlVrxXdCPUlA8hqOVpYLicjeQSnvnzTpz80vfG2ZXas/edit?usp=sharing"
+            },
+            {
+              "type": "google_doc_indexhtml",
+              "label": "🧑💻 Index.html",
+              "url": "https://docs.google.com/document/d/1HObJlf6YgOy7evl4C2Fcm8_jQm5_3F7Bng_EDr64otk/edit?usp=sharing"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_6_card",
+              "type": "card_image",
+              "original_url": "https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/98be505b1d7bdcd02395d74cb56e5b85/image.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNswqrwaPLMhH3wmBlzoWx3xFytK8ovo3v3_UVsyO25I_wsU2E_XPQa4gLHI3_bdUXYv33KP10CqNTphWdmA77HLPER-cST5U9ogweCJIBO2d5g==",
+              "local_path": "assets/padlet/post_6_card.png"
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "title": "發布部署",
+          "author": "李慧玲",
+          "date": "12天 之前",
+          "content": "發布部署\n點擊右上角「部署」➔「新增部署」。\n類型選擇「網頁應用程式」。\n執行身分選「我」，權限選「所有人」。\n部署完成後，去試算表後台看看：\n✨ 您會發現「題庫、名單、考試分頁」已經被系統通通變出來了！學生在前台繳交後，成績也會自動進來！",
+          "links": [
+            {
+              "type": "wish_attachment",
+              "url": "https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/MbejW1K48PwXQNkG"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_7_card",
+              "type": "card_image",
+              "original_url": "https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/9c5afb11d4c6b6ebb63f18629ce8c7ae/image.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNszEUofiEDFsRAYDawyko7DYagA6UW4NEqJaLa_-jnafbl85ZUaI41DKJwTxyv41wveGEXzQUyWBxPDq8b8_Ni_9NDy31fQASTcXQJ50HQvHlQ==",
+              "local_path": "assets/padlet/post_7_card.png"
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "title": "更改prompt中的google sheet ID,複製自己ID的prompt貼回Gemini",
+          "author": "李慧玲",
+          "date": "24天 之前",
+          "content": "我要部署到ＧＡＳ，請讓所有人繳交的檔案，整併在我的google sheet，   我的google sheet ID是：1SCuj58K9RlWgTIyZtCXZ6vf9iufEIw_iUGSEnaL4OmM 請直接將此 ID 寫入程式碼中，不要預留讓我修改的空間。在我的google sheet上先預建立幾個模擬的分頁和內容。   系統要能「完全自動」建立範本與模擬資料，而不需要手動進去編輯器按「執行」code.gs 裡的程式碼。在網頁載入讀取資料時（getInitialData 函數）加入了一個自動偵測機制。只要系統發現的Google Sheet 裡面沒有相對應的分頁，請自動觸發建立並填入模擬資料。     同一個座號填寫者重複測驗時，請跳出提醒視窗，『您已經有成績，請確認是否修改您的成績』。讓使用者按確定按鈕才可以讓他再次提交，但是請不要覆寫資料，直接在此座號的測驗者，下一列存儲格標示『⚠️修改分數』。   前台呈現即時數據時，請呈現真實姓名身份資訊，但是名字中的第二個字以「○」呈現，並進行排名。   請不要呼叫ＡＰＩ的模式，提供我完整的ＧＡＳ程式碼，讓我可以簡單複製貼上即可執行。   部署程式碼請用 📁 符號加上命名告訴我是要貼在『code.gs』 前台請用 🧑💻 加上命名明確告訴我這是貼在『Index』且統一Index的I大寫。   實現 CRUD 功能。   請處理非 GAS 環境中 google is not defined 的問題，加入了能讓網頁在本地預覽時提供模擬測試資料，並在部署到 GAS 後順暢連線到後端。同時將表單重置功能抽離為獨立函式 resetFormAfterSubmit 增加可讀性。\n\n不要複製_prompt模板來源參考：優履團隊",
+          "links": [],
+          "images": []
+        }
+      ]
+    },
+    {
+      "column": "成果_互動式評量",
+      "postCount": 11,
+      "posts": [
+        {
+          "index": 9,
+          "title": "福豐國中",
+          "author": "秘境探路人",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/rA079gVOZD7d"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_9_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/feddc1030b13bab5a9632b162ac984f275e0821a/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_9_card.png"
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "title": "李慧玲老師 成果分享",
+          "author": "李慧玲",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/ROrWVmTzhyrG"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_10_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/0f900d4f613fb212cd6744c6d8a9abb08a6016ca/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_10_card.png"
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "title": "建國國中",
+          "author": "建國",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/2EysRbggnmCc"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_11_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/bd5ad8471543df77f7960fc3fd70fabf1245ab0b/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_11_card.png"
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "title": "經國國中",
+          "author": "軍佑(經國)",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/aktpNew2do55"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_12_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/56e5dcc1968bc55974a22f42866b8fb63fa4af11/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_12_card.png"
+            }
+          ]
+        },
+        {
+          "index": 13,
+          "title": "桃園國中",
+          "author": "桃園國中",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/DGcJ8WnRZUCX"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_13_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/debee8bc55a40e4e4567db532887ebb54aacf8d2/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_13_card.png"
+            }
+          ]
+        },
+        {
+          "index": 14,
+          "title": "慈文國中",
+          "author": "Observant Eel",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI\nhttps://share.gemini.google/FKOb2iLHHJbr",
+          "links": [
+            {
+              "url": "https://share.gemini.google/FKOb2iLHHJbr"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_14_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/dd27e94150bb03403a39aec47a92e7d10989c7fc/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_14_card.png"
+            }
+          ]
+        },
+        {
+          "index": 15,
+          "title": "中興國中",
+          "author": "吳育蘋",
+          "date": "11天 之前",
+          "content": "Google Search - AI Mode",
+          "links": [
+            {
+              "url": "https://share.google/aimode/dnkcj7DV5BoEkpqh8"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_15_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/5e42e500cad50eebb374434a332b3d3f0bf97ace/bhwebsnap-23fb40d7e064c277dfefcee62ec32472af103027-h-7f898667e113d236dc9f5f41e0af017f.png",
+              "local_path": "assets/padlet/post_15_card.png"
+            }
+          ]
+        },
+        {
+          "index": 16,
+          "title": "建國國中_畢氏定理",
+          "author": "陳柏宇",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/SWKw82Uyoz2v"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_16_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/ce6385c88656c62032401a9ceb9546ecf4fd5dde/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_16_card.png"
+            }
+          ]
+        },
+        {
+          "index": 17,
+          "title": "青溪國中",
+          "author": "王廷豪",
+          "date": "11天 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/Kx8esK7sggDX"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_17_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/950b228ec6f86d34328f89c6a1fd8bbb511846e6/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_17_card.png"
+            }
+          ]
+        },
+        {
+          "index": 18,
+          "title": "大有國中",
+          "author": "昌昌",
+          "date": "11天 之前",
+          "content": "userCodeAppPanel?createOAuthDialog=true",
+          "links": [
+            {
+              "url": "https://n-2prjbmhifb2ihndveudzaegrhotzsrrakye3p2y-0lu-script.googleusercontent.com/userCodeAppPanel?createOAuthDialog=true"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_18_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/2a99a5ff95282c3f9c6656966d65a4b3882693ed/bhwebsnap-8d75fd580883431143d9a353796f8e1eaa04f78e-h-fd8e0b843055faa833eb23e1ed5176e3.png",
+              "local_path": "assets/padlet/post_18_card.png"
+            }
+          ]
+        },
+        {
+          "index": 19,
+          "title": "11/16 指數律",
+          "author": "中興國中",
+          "date": "7天 之前",
+          "content": "內容是指數律\nGemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/WKlZNxlLMKw6"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_19_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/ab77d6d588407ef0290870c2f1fb3661da519b91/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_19_card.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "column": "成果_部署",
+      "postCount": 11,
+      "posts": [
+        {
+          "index": 20,
+          "title": "宏仁國中",
+          "author": "林偉業",
+          "date": "20小時 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/XZQhakqMoWVa"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_20_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/0dc84752600f1f5937e9588161388d8be16f8dfc/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_20_card.png"
+            }
+          ]
+        },
+        {
+          "index": 21,
+          "title": "魚池國中",
+          "author": "Astral Nomad",
+          "date": "20小時 之前",
+          "content": "Gemini - direct access to Google AI",
+          "links": [
+            {
+              "url": "https://share.gemini.google/tziGijMTOQ1R"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_21_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/8bc4ad4d02a7562dcb5cc7c199d6d203dfd86c7b/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png",
+              "local_path": "assets/padlet/post_21_card.png"
+            }
+          ]
+        },
+        {
+          "index": 22,
+          "title": "建國國中_畢氏定理",
+          "author": "陳柏宇",
+          "date": "11天 之前",
+          "content": "國中數學評量：畢氏定理 - 陳柏宇老師設計",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbzkkicz1i6fTv85sz9_WZFT7Yrbb353nXM4YgGBK_fpYeJAV2S_inXsnUe_X79lfVs/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_22_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/875a01994334cbe895ba810302991e9ecac4affb/bhwebsnap-abca37fb84df5705a615c4a6b38c2a22995719d6-h-b50731ba30a7fdeebeb0f7385d0cbbae.png",
+              "local_path": "assets/padlet/post_22_card.png"
+            }
+          ]
+        },
+        {
+          "index": 23,
+          "title": "福豐國中_分數的四則運算",
+          "author": "yingxuan",
+          "date": "11天 之前",
+          "content": "國中數學評量：分數的四則運算｜林萱老師",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbwW6lm0ZHlJgfkONOnSfxOp2n9PpndUarHL9U6zRatZdVMQiVgVt0OEDaPSvJ85PEM5uQ/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_23_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/49036c93693a033f1f2bb316ecd93ac3783d327f/bhwebsnap-2300acfdba3dfef112790b73ac25e0b3556d87c9-h-22c58dfe235085338a992e80cd4f1042.png",
+              "local_path": "assets/padlet/post_23_card.png"
+            }
+          ]
+        },
+        {
+          "index": 24,
+          "title": "福豐國中_解一元一次方程式",
+          "author": "秘境探路人",
+          "date": "11天 之前",
+          "content": "解一元一次方程式 - 國中數學線上評量",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbxeN1kcfjxaBSc68kFG2RmnlyYYyBEjmBTx_icGXVWnBwTQkyc-ytHaXHpcJlVkAmKk/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_24_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/3725a992b64f06a38e77b3f1c66a9cf02faf5992/bhwebsnap-ef5da8deaffc3d9ef282ddf477a5fc5437c37cd0-h-ae7ffc9415a0f776898431543892abcb.png",
+              "local_path": "assets/padlet/post_24_card.png"
+            }
+          ]
+        },
+        {
+          "index": 25,
+          "title": "經國國中_二次函數",
+          "author": "軍佑(經國)",
+          "date": "11天 之前",
+          "content": "國中數學評量：二次函數 | 劉軍佑老師設計",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbwOJC494gXUoW9_VEb391nqvBhkYCvUPbaoD_6Iv1q2JK_4HTG9AXvpDRokvVPODnhz/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_25_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/4bfeb2c201d31a3a32d89dd39894eaf548c10575/bhwebsnap-7c80b32f7da5623ee23ba9243ff4cb3e55211e74-h-acbe9777f076e817f7765b3ecddbec89.png",
+              "local_path": "assets/padlet/post_25_card.png"
+            }
+          ]
+        },
+        {
+          "index": 26,
+          "title": "慈文國中_一元二次方程式",
+          "author": "賴佩琳",
+          "date": "11天 之前",
+          "content": "一元二次方程式闖關評量 - 設計者：Q老師",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbwATB2RIvEw3X9ErmWjHvzakf0WlLSdf8VqX5i62mEtE-Bpb_JHeQHyldduGMCj2VB0/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_26_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/8ae323eae9551cc798ca6629a9b4066872abd864/bhwebsnap-178678c77968754b9444d089025a1d21ee7927a1-h-ae7ffc9415a0f776898431543892abcb.png",
+              "local_path": "assets/padlet/post_26_card.png"
+            }
+          ]
+        },
+        {
+          "index": 27,
+          "title": "文昌國中",
+          "author": "文昌國中",
+          "date": "11天 之前",
+          "content": "學生測驗繳交與即時排名系統",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbzPWvsj4uYMTehAJUE6Rhu0mrwi01k0wBnNONOUNB5UOpdZxMyl9JyeHHkSgUTJ8drEJQ/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_27_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/5f1fc0e603e7fd72e570a3a14844dbb2f3eeec7b/bhwebsnap-98fa638696d461e2a5c77781e486551f86ba8ac5-h-22c58dfe235085338a992e80cd4f1042.png",
+              "local_path": "assets/padlet/post_27_card.png"
+            }
+          ]
+        },
+        {
+          "index": 28,
+          "title": "青溪國中",
+          "author": "王廷豪",
+          "date": "11天 之前",
+          "content": "解一元一次方程式 - 廷豪老師互動評量系統",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbyyLQaso9f8gz63bGvs8kGYaM18AKNXTqLSK2Qx7q15sGw2LFwkJ_5xv_lG0mJQlzjhmQ/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_28_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/6cc4237fcdd5020a725355cd4dc8fa25cb6705a5/bhwebsnap-043ea320d3ff259cc307e8dd2419adc5381e1752-h-22c58dfe235085338a992e80cd4f1042.png",
+              "local_path": "assets/padlet/post_28_card.png"
+            }
+          ]
+        },
+        {
+          "index": 29,
+          "title": "慈文國中",
+          "author": "匿名",
+          "date": "11天 之前",
+          "content": "國中數學互動評量：解一元一次方程式",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbziERZyNKr7lfQwLUmCM2jhZuAF6TTpDfIuBZ5hlvC7UFsEzAN8E56ON06EUJyTqxcb/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_29_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/fc8734e6e084b47245918eaeab12fba2c0c671e9/bhwebsnap-8fbca9f66df5ce266ae0840ccaba0468eced1e55-h-ae7ffc9415a0f776898431543892abcb.png",
+              "local_path": "assets/padlet/post_29_card.png"
+            }
+          ]
+        },
+        {
+          "index": 30,
+          "title": "會稽國中_二元一次聯立方程式",
+          "author": "移山建設者",
+          "date": "11天 之前",
+          "content": "國中數學評量：解二元一次聯立方程式｜張嘉言老師",
+          "links": [
+            {
+              "url": "https://script.google.com/macros/s/AKfycbzPJj9w4ImabWb1MEcwdSnPeAMKDHaIFZcxWbsv5Tv9QrXuwuLwKKnl5DJGTyvaUyo1Qw/exec"
+            }
+          ],
+          "images": [
+            {
+              "id": "post_30_card",
+              "type": "card_image",
+              "original_url": "https://padlet-artifacts.storage.googleapis.com/62eca62ab38d17b84bdc5dce55971c13d2355e37/bhwebsnap-4e3fdf84cda0ea632578096cc9f6b27051556303-h-b50731ba30a7fdeebeb0f7385d0cbbae.png",
+              "local_path": "assets/padlet/post_30_card.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

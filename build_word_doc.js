@@ -624,6 +624,43 @@ Google Sheet ID = 1SeihVjLWtEZF4KrbtBukPqiyo4Km_0-kdcj21ee1Ex8`),
           ]),
 
           p(""),
+          h1("第九章：Padlet 研習協作板 31 項成果與各校實作大彙整"),
+          calloutBox("📌 Padlet 研習協作板資訊", [
+            "協作板主題：115南投縣素養研習_Apps Script部署",
+            "線上協作板短網址：https://reurl.cc/NOKz9k (https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy)",
+            "主辦與建立者：桃園市中興國中 李慧玲老師",
+            "本章節完整收錄 Padlet 5 大專欄、31 項研習成果、各校互動評量作品與備份文件連結。"
+          ]),
+
+          h2("9.1 核心教學資源與雲端文件連結"),
+          multiP([
+            { text: "• 📁 Code.gs 完整後端代碼雲端文件：", bold: true },
+            { text: "https://docs.google.com/document/d/1wlVrxXdCPUlA8hqOVpYLicjeQSnvnzTpz80vfG2ZXas/edit?usp=sharing\n" },
+            { text: "• 🧑💻 Index.html 完整前端代碼雲端文件：", bold: true },
+            { text: "https://docs.google.com/document/d/1HObJlf6YgOy7evl4C2Fcm8_jQm5_3F7Bng_EDr64otk/edit?usp=sharing\n" },
+            { text: "• 🎮 互動式評量示範（不只老鼠會打洞）：", bold: true },
+            { text: "https://script.google.com/macros/s/AKfycbzoSwkkp3_jgehU5h8K1ilQBprDvrBXJ6DW5fyUedkFglbhCRf_LEfMtZn6WE6xfcOhCg/exec\n" },
+            { text: "• 🤖 Gemini Canvas 一元一次方程式示範：", bold: true },
+            { text: "https://share.gemini.google/DCEt33VRtyI2" }
+          ]),
+
+          h2("9.2 各校教師互動評量 APP 與 GAS 部署作品一覽表"),
+          p("研習中來自南投與桃園各國中之現場教師，成功設計並部署之單元作品清單："),
+          createSummaryTable([
+            { slide: "成果 1", title: "福豐國中 ｜ 林萱老師", desc: "單元：國中數學評量【分數的四則運算】（GAS 正式網頁應用程式）" },
+            { slide: "成果 2", title: "建國國中 ｜ 陳柏宇老師", desc: "單元：國中數學評量【畢氏定理】（含 Gemini Canvas 與 GAS 正式網址）" },
+            { slide: "成果 3", title: "經國國中 ｜ 劉軍佑老師", desc: "單元：國中數學評量【二次函數】（含 Gemini Canvas 與 GAS 正式網址）" },
+            { slide: "成果 4", title: "慈文國中 ｜ 賴佩琳老師", desc: "單元：國中數學評量【一元二次方程式闖關評量】（Q老師設計）" },
+            { slide: "成果 5", title: "會稽國中 ｜ 張嘉言老師", desc: "單元：國中數學評量【解二元一次聯立方程式】（GAS 正式網頁應用程式）" },
+            { slide: "成果 6", title: "福豐國中 ｜ 秘境探路人", desc: "單元：國中數學線上評量【解一元一次方程式】（GAS 正式網頁應用程式）" },
+            { slide: "成果 7", title: "青溪國中 ｜ 王廷豪老師", desc: "單元：國中數學【解一元一次方程式 廷豪老師互動評量系統】" },
+            { slide: "成果 8", title: "中興國中 ｜ 吳育蘋老師", desc: "單元：國中數學評量【11/16 指數律】與 AI 互動評量探索" },
+            { slide: "成果 9", title: "文昌國中 ｜ 文昌國中教師", desc: "單元：學生測驗繳交與即時排名系統（GAS 部署作業）" },
+            { slide: "成果 10", title: "宏仁國中 ｜ 林偉業老師", desc: "單元：國中數學自主學習評量（Gemini Canvas 成果）" },
+            { slide: "成果 11", title: "魚池國中 ｜ 研習教師", desc: "單元：國中數學自主學習評量（Gemini Canvas 成果）" }
+          ]),
+
+          p(""),
           new Paragraph({
             alignment: AlignmentType.CENTER,
             spacing: { before: 360, after: 120 },

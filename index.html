@@ -39,7 +39,6 @@
       touch-action: none;
       cursor: crosshair;
     }
-    /* Toast animation */
     .toast-slide {
       animation: toastIn 0.3s ease forwards;
     }
@@ -47,9 +46,35 @@
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+    /* Kanban column custom scrollbar */
+    .kanban-col::-webkit-scrollbar {
+      width: 6px;
+    }
+    .kanban-col::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .kanban-col::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .kanban-col::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .kanban-board-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    .kanban-board-scroll::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 4px;
+    }
+    .kanban-board-scroll::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 4px;
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased">
 
   <!-- ==================== 密碼鎖定畫面 (Password: 049) ==================== -->
   <div id="lockScreen" class="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-4">
@@ -114,12 +139,12 @@
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white font-black text-xl shadow-md">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-500 flex items-center justify-center text-white font-black text-xl shadow-md">
           數
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">115 國中數學領域 數位科技推動自主學習探究</h1>
-          <p class="text-xs text-slate-500 hidden sm:block">AI × APP × GAS 互動評量與雲端串接知識庫 ｜ 講師：李慧玲老師</p>
+          <p class="text-xs text-slate-500 hidden sm:block">AI × APP × GAS 互動評量、雲端串接與 Padlet 協作專區 ｜ 李慧玲老師主講</p>
         </div>
       </div>
       <div class="flex items-center space-x-2 sm:space-x-3">
@@ -128,7 +153,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span class="hidden md:inline">下載重製</span> Word 檔
+          <span class="hidden md:inline">下載講義</span> Word 檔
         </a>
         <!-- 上鎖按鈕 -->
         <button onclick="lockSystem()" title="重新上鎖" class="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition">
@@ -144,45 +169,44 @@
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
     <!-- 頂部 Hero 資訊卡 -->
-    <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-8 shadow-xl relative overflow-hidden">
+    <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-6 shadow-xl relative overflow-hidden">
       <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="relative z-10 max-w-3xl">
-        <div class="inline-flex items-center space-x-2 bg-blue-500/20 border border-blue-400/30 px-3 py-1 rounded-full text-xs font-semibold text-blue-200 mb-4">
-          <span>桃園市數學輔導團</span>
+      <div class="relative z-10 max-w-4xl">
+        <div class="inline-flex flex-wrap items-center gap-2 bg-blue-500/20 border border-blue-400/30 px-3 py-1 rounded-full text-xs font-semibold text-blue-200 mb-4">
+          <span>桃園市中興國中 李慧玲老師</span>
           <span>•</span>
-          <span>中興國中 李慧玲老師</span>
+          <span>36 頁完整實作手冊</span>
           <span>•</span>
-          <span>全 36 頁教材整理</span>
+          <span class="text-amber-300">Padlet 5 大專欄・31 項研習成果收錄</span>
         </div>
         <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
-          國中數學 AI × APP × GAS 全方位自主學習手冊
+          國中數學 AI × APP × GAS 自主學習探究知識庫
         </h2>
         <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-          掌握現代 AI 輔助教學利器！從 Gemini Canvas 快速生成三關卡數學評量，到透過 Google Apps Script (GAS) 全自動連接 Google 試算表，建立零成本、免 API Key 的即時英雄榜與學習歷程追蹤系統。
+          從 Gemini Canvas 生成三關卡數學評量，到 Google Apps Script (GAS) 自動連結 Google 試算表，建立零成本即時英雄榜！並完整收錄 <strong>Padlet 研習協作板</strong>之所有講義、部署指南、程式碼連結與各校教師（建國、福豐、經國、慈文、中興、青溪、會稽等）之優秀互動作品！
         </p>
 
-        <!-- 快捷標籤列 -->
-        <div class="flex flex-wrap gap-2 text-xs">
-          <button onclick="filterByTab('prompts')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm border border-white/15 transition flex items-center">
-            📋 核心提示詞 (Prompt)
+        <!-- 主導覽視圖切換器 -->
+        <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+          <button onclick="switchMainView('padlet')" id="mainView-padlet" class="main-view-btn px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow transition flex items-center gap-1.5">
+            📌 Padlet 研習協作板 (31 項成果)
           </button>
-          <button onclick="filterByTab('step4')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm border border-white/15 transition flex items-center">
-            📄 Code.gs & 💻 Index.html
+          <button onclick="switchMainView('slides')" id="mainView-slides" class="main-view-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl backdrop-blur-sm border border-white/15 transition flex items-center gap-1.5">
+            📘 教材投影片指南 (36 頁)
           </button>
-          <button onclick="filterByTab('step5')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm border border-white/15 transition flex items-center">
-            🚀 部署與權限授權
+          <button onclick="switchMainView('prompts')" id="mainView-prompts" class="main-view-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl backdrop-blur-sm border border-white/15 transition flex items-center gap-1.5">
+            📋 核心提示詞庫 (Prompt)
           </button>
-          <button onclick="filterByTab('demo')" class="px-3 py-1.5 bg-emerald-500/30 hover:bg-emerald-500/40 text-emerald-200 rounded-lg backdrop-blur-sm border border-emerald-400/30 transition flex items-center font-bold">
-            🎮 互動試玩體驗
+          <button onclick="switchMainView('demo')" id="mainView-demo" class="main-view-btn px-4 py-2 bg-emerald-500/30 hover:bg-emerald-500/40 text-emerald-200 font-bold rounded-xl backdrop-blur-sm border border-emerald-400/30 transition flex items-center gap-1.5">
+            🎮 評量試玩 Demo
           </button>
         </div>
       </div>
     </div>
 
-    <!-- 搜尋與分類控制列 -->
+    <!-- 搜尋與狀態列 -->
     <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 mb-6">
-      <!-- 搜尋列 -->
-      <div class="relative mb-4">
+      <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -190,60 +214,140 @@
         </div>
         <input type="text" id="searchInput" oninput="handleSearch()"
                class="w-full pl-10 pr-24 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition"
-               placeholder="輸入關鍵字查詢 (例如：Sheet ID, Canvas, 提示詞, Code.gs, 授權, 英雄榜, 049)...">
+               placeholder="輸入關鍵字跨庫查詢 (例如：福豐, 畢氏定理, 二次函數, Sheet ID, Code.gs, 李慧玲, 049)...">
         <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 px-2.5 py-1 text-xs text-slate-400 hover:text-slate-600 bg-slate-200 hover:bg-slate-300 rounded-lg transition">
           清除
         </button>
       </div>
 
-      <!-- 分類標籤頁 (Tabs) -->
-      <div class="flex items-center space-x-2 overflow-x-auto pb-1 scrollbar-none text-xs sm:text-sm font-medium">
-        <button onclick="setActiveTab('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-xl bg-blue-600 text-white whitespace-nowrap shadow-sm transition">
-          全部步驟 (36 頁)
-        </button>
-        <button onclick="setActiveTab('prep')" id="tab-prep" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          前置準備 (S1-5)
-        </button>
-        <button onclick="setActiveTab('step1')" id="tab-step1" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          1. 評量 APP 生成 (S6-7)
-        </button>
-        <button onclick="setActiveTab('step2')" id="tab-step2" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          2. 試算表設定 (S8-10)
-        </button>
-        <button onclick="setActiveTab('step3')" id="tab-step3" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          3. GAS 指令與架構 (S11-14)
-        </button>
-        <button onclick="setActiveTab('step4')" id="tab-step4" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          4. Apps Script 設定 (S15-23)
-        </button>
-        <button onclick="setActiveTab('step5')" id="tab-step5" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          5. 部署與進階授權 (S24-30)
-        </button>
-        <button onclick="setActiveTab('step6')" id="tab-step6" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 whitespace-nowrap transition">
-          6. 成績驗收與維護 (S31-36)
-        </button>
-        <button onclick="setActiveTab('prompts')" id="tab-prompts" class="tab-btn px-4 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-800 whitespace-nowrap transition font-bold">
-          📋 核心提示詞庫
-        </button>
-        <button onclick="setActiveTab('demo')" id="tab-demo" class="tab-btn px-4 py-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 whitespace-nowrap transition font-bold">
-          🎮 評量試玩 Demo
-        </button>
+      <!-- 快捷過濾標籤列 (動態依當前 View 調整) -->
+      <div id="subFilterBar" class="flex items-center space-x-2 overflow-x-auto pt-3 pb-1 scrollbar-none text-xs font-medium">
+        <!-- 由 JavaScript 動態填充 -->
       </div>
     </div>
 
     <!-- 搜尋統計 -->
     <div id="searchStats" class="text-xs text-slate-500 mb-4 px-1 flex items-center justify-between">
-      <span>正在顯示：<strong id="itemCount" class="text-blue-600 font-bold">36</strong> 個項目</span>
-      <span class="text-slate-400">點擊卡片可查看詳細說明或複製提示詞</span>
+      <span>正在顯示：<strong id="itemCount" class="text-blue-600 font-bold">31</strong> 個項目</span>
+      <span class="text-slate-400">點擊卡片縮圖可檢視大圖 ｜ 點擊連結可直接試玩互動評量</span>
     </div>
 
-    <!-- 卡片展示網格 (Card Grid) -->
-    <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- 卡片內容將由 JavaScript 動態渲染 -->
-    </div>
+    <!-- ==================== VIEW 1: PADLET 研習協作板 ==================== -->
+    <section id="viewPadlet" class="block">
+      <!-- Padlet 原始資訊 Banner -->
+      <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+            📌
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900">115南投縣素養研習_Apps Script部署 協作成果牆</h3>
+            <p class="text-xs text-slate-600">
+              建立者：<span class="font-medium text-amber-800">李慧玲老師</span> ｜ 包含講義、Code.gs / Index.html 雲端文件、以及南投/桃園各校教師互動評量成品
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 text-xs">
+          <a href="https://reurl.cc/NOKz9k" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-lg font-medium transition flex items-center">
+            🔗 開啟 Padlet 原網址 (reurl.cc/NOKz9k)
+          </a>
+          <button onclick="togglePadletLayout()" id="layoutToggleBtn" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold transition flex items-center">
+            切換為網格檢視
+          </button>
+        </div>
+      </div>
 
-    <!-- ==================== 互動試玩展示區 (Demo Tab) ==================== -->
-    <div id="demoSection" class="hidden">
+      <!-- 看板模式 (Kanban / Horizontal scroll) -->
+      <div id="padletKanbanContainer" class="kanban-board-scroll flex gap-5 overflow-x-auto pb-6 items-start">
+        <!-- 5 大專欄由 JS 渲染 -->
+      </div>
+
+      <!-- 網格模式 (Grid layout) -->
+      <div id="padletGridContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 扁平網格卡片由 JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: 教材投影片 36 SLIDES ==================== -->
+    <section id="viewSlides" class="hidden">
+      <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 投影片卡片由 JS 渲染 -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: 核心提示詞庫專區 ==================== -->
+    <section id="viewPrompts" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 font-bold text-xs rounded-full mb-2">第一步必用</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">提示詞一：生成數學評量活動 APP</h3>
+            <p class="text-xs text-slate-500">複製貼入 Gemini Canvas，記得自行替換單元名稱與設計者教師！</p>
+          </div>
+          <button onclick="copyToClipboard('prompt1Text')" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl shadow transition">
+            📋 複製完整提示詞
+          </button>
+        </div>
+        <pre id="prompt1Text" class="p-4 bg-slate-900 text-emerald-400 font-mono text-xs sm:text-sm rounded-xl overflow-x-auto whitespace-pre-wrap leading-relaxed">你是一個專業的國中數學教師，要設計一個單元的數學評量活動，單元為：解一元一次方程式。
+首頁要設計者：老李小妹老師，並有學生可以輸入：班級、座號、姓名。
+題目分為三個關卡，基礎關：5題、進階題：3題、挑戰關：2題，共10題，每題10分，合計100分。
+每道題目旁要有一個可以點選計算紙，提供學生計算。
+三個關卡都完成後，要呈現學生在各關卡的答題情況及分數。
+學生第二次重做時，題目難度一樣，但是題目要不一樣。
+不要用latex語法，數學公式：請在網頁中使用 KaTeX（或 MathJax）來渲染所有數學公式。確保當頁面載入或數值變動時，數學符號能夠正確且美觀地顯示為標準數學排版，或請使用 display math 格式以確保數學公式的清晰可讀與排版整齊，最後請用html格式輸出。並使用「響應式網頁設計」(Responsive Web Design) 以及「萬用輸入支援」</pre>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-6">
+          <div>
+            <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 font-bold text-xs rounded-full mb-2">第二步必用</span>
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">提示詞二：GAS 後端與試算表自動化串接指令</h3>
+            <p class="text-xs text-slate-500">將您的 Google Sheet ID 填入後，送出給 Gemini 生成 Code.gs 與 Index.html！</p>
+          </div>
+          <button onclick="copyToClipboard('prompt2Text')" class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl shadow transition">
+            📋 複製完整提示詞
+          </button>
+        </div>
+        <pre id="prompt2Text" class="p-4 bg-slate-900 text-teal-300 font-mono text-xs sm:text-sm rounded-xl overflow-x-auto whitespace-pre-wrap leading-relaxed">我要部署到ＧＡＳ，請讓所有人繳交的檔案，整併在我的google sheet，我的google sheet ID是：
+1SCuj58K9RlWgTIyZtCXZ6vf9iufEIw_iUGSEnaL4OmM
+請直接將此 ID 寫入程式碼中，不要預留讓我修改的空間。在我的google sheet上先預建立幾個模擬的分頁和內容。
+系統要能「完全自動」建立範本與模擬資料，而不需要手動進去編輯器按「執行」code.gs 裡的程式碼。在網頁載入讀取資料時（getInitialData 函數）加入了一個自動偵測機制。只要系統發現的Google Sheet 裡面沒有相對應的分頁，請自動觸發建立並填入模擬資料。
+同一個座號填寫者重複測驗時，請跳出提醒視窗，『您已經有成績，請確認是否修改您的成績』。讓使用者按確定按鈕才可以讓他再次提交，但是請不要覆寫資料，直接在此座號的測驗者，下一列存儲格標示『⚠️修改分數』。
+前台呈現即時數據時，請呈現真實姓名身份資訊，但是名字中的第二個字以「○」呈現，並進行排名。
+請不要呼叫ＡＰＩ的模式，提供我完整的ＧＡＳ程式碼，讓我可以簡單複製貼上即可執行。
+部署程式碼請用 📁 符號加上命名告訴我是要貼在『code.gs』 前台請用 🧑💻 加上命名明確告訴我這是貼在『Index』且統一Index的I大寫。
+實現 CRUD 功能。
+請處理非 GAS 環境中 google is not defined 的問題，加入了能讓網頁在本地預覽時提供模擬測試資料，並在部署到 GAS 後順暢連線到後端。同時將表單重置功能抽離為獨立函式 resetFormAfterSubmit 增加可讀性。</pre>
+      </div>
+
+      <!-- 雲端文件參考連結卡片 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="https://docs.google.com/document/d/1wlVrxXdCPUlA8hqOVpYLicjeQSnvnzTpz80vfG2ZXas/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="p-5 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-md transition flex items-center justify-between group">
+          <div class="flex items-center space-x-3">
+            <span class="text-2xl">📁</span>
+            <div>
+              <h4 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Code.gs 雲端文件備份範本</h4>
+              <p class="text-xs text-slate-500">李慧玲老師提供的 Code.gs 完整代碼 Google Doc</p>
+            </div>
+          </div>
+          <span class="text-xs text-blue-600 font-semibold">開啟 ↗</span>
+        </a>
+
+        <a href="https://docs.google.com/document/d/1HObJlf6YgOy7evl4C2Fcm8_jQm5_3F7Bng_EDr64otk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="p-5 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-md transition flex items-center justify-between group">
+          <div class="flex items-center space-x-3">
+            <span class="text-2xl">🧑💻</span>
+            <div>
+              <h4 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Index.html 雲端文件備份範本</h4>
+              <p class="text-xs text-slate-500">李慧玲老師提供的 Index.html 前台代碼 Google Doc</p>
+            </div>
+          </div>
+          <span class="text-xs text-blue-600 font-semibold">開啟 ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: 互動評量 DEMO ==================== -->
+    <section id="viewDemo" class="hidden">
       <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 max-w-3xl mx-auto">
         <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
           <div>
@@ -345,48 +449,18 @@
           </button>
         </div>
       </div>
-    </div>
-
-    <!-- ==================== 核心提示詞庫專區 (Prompts Tab) ==================== -->
-    <div id="promptsSection" class="hidden space-y-6">
-      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-6">
-          <div>
-            <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 font-bold text-xs rounded-full mb-2">第一步必用</span>
-            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">提示詞一：生成數學評量活動 APP</h3>
-            <p class="text-xs text-slate-500">複製貼入 Gemini Canvas，記得自行替換單元名稱與設計者教師！</p>
-          </div>
-          <button onclick="copyToClipboard('prompt1Text')" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl shadow transition">
-            📋 複製完整提示詞
-          </button>
-        </div>
-        <pre id="prompt1Text" class="p-4 bg-slate-900 text-emerald-400 font-mono text-xs sm:text-sm rounded-xl overflow-x-auto whitespace-pre-wrap leading-relaxed">你是一個專業的國中數學教師，要設計一個單元的數學評量活動，單元為：解一元一次方程式。
-首頁要設計者：劉大帥老師，並有學生可以輸入：班級、座號、姓名。
-題目分為三個關卡，基礎關：5題、進階題：3題、挑戰關：2題，共10題，每題10分，合計100分。
-每道題目旁要有一個可以點選計算紙，提供學生計算。
-三個關卡都完成後，要呈現學生在各關卡的答題情況與分數。
-學生第二次重做時，題目難度一樣，但是題目要不一樣。
-不要用latex語法，數學公式請在網頁中使用KaTeX(或MathJax)來渲染...</pre>
-      </div>
-
-      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-4 mb-6">
-          <div>
-            <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 font-bold text-xs rounded-full mb-2">第二步必用</span>
-            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">提示詞二：GAS 後端與試算表自動化串接指令</h3>
-            <p class="text-xs text-slate-500">將您的 Google Sheet ID 填入後，送出給 Gemini 生成 Code.gs 與 Index.html！</p>
-          </div>
-          <button onclick="copyToClipboard('prompt2Text')" class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl shadow transition">
-            📋 複製完整提示詞
-          </button>
-        </div>
-        <pre id="prompt2Text" class="p-4 bg-slate-900 text-teal-300 font-mono text-xs sm:text-sm rounded-xl overflow-x-auto whitespace-pre-wrap leading-relaxed">我要部署到GAS，請讓所有人繳交的檔案，整併在我的google sheet，我的google sheet ID是：
-1SeihVjLWtEZF4KrbtBukPqiyo4Km_0-kdcj21ee1Ex8
-請直接將此 ID 寫入程式碼中，不要預留讓我修改的空間。在我的google sheet上先預建立幾個模擬的分頁和內容。系統要能『完全自動』建立範本與模擬資料，而不需要手動進去編輯器按「執行」code.gs裡的程式碼。在網頁載入讀取資料時（getInitialData函數）加入了一個自動偵測機制。只要系統發現的Google Sheet裡面沒有相對應的分頁，請自動觸發建立並填入模擬資料。同一個座號填寫者重複測驗時，請跳出提醒視窗，『你已經有成績，請確認是否修改您的成績』。讓使用者按確定按鈕才可以讓他再次提交，但是請不要覆寫資料，直接在此座號的測驗者，下一列存儲格標示『⚠修改分數』。前台呈現即時數據時，請呈現可以辨別使用者的身份資訊，並進行排名。使用隨機代碼呈現。請不要呼叫API的模式，提供我完整的GAS程式碼，讓我可以用簡單複製貼上即可執行。部署程式碼請用 📄 符號加上命名告訴我要貼在『code.gs』前台請用 💻 加上命名明確告訴我這是貼在『Index』且統一Index的I大寫。實現CRUD功能。請處理非GAS環境中 google is not defined 的問題，加入了能讓網頁在本地預覽時提供模擬測試資料，並在部署到GAS後順暢連接到後端。同時將表單重置功能抽離為獨立函式 resetFormAfterSubmit 增加可讀性。</pre>
-      </div>
-    </div>
+    </section>
 
   </main>
+
+  <!-- ==================== 圖片彈窗 Lightbox ==================== -->
+  <div id="imageLightbox" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4" onclick="closeLightbox(event)">
+    <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center">
+      <button onclick="closeLightboxDirect()" class="absolute -top-12 right-0 text-white hover:text-slate-300 text-3xl font-bold p-2">✕</button>
+      <img id="lightboxImg" src="" alt="圖片大圖" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl bg-slate-900 border border-slate-700">
+      <p id="lightboxCaption" class="text-white text-sm mt-3 font-medium text-center"></p>
+    </div>
+  </div>
 
   <!-- ==================== 浮動 Toast 提示 ==================== -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-2 text-sm">
@@ -398,389 +472,65 @@
   <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4">
       <p>115 國中數學領域 數位科技推動自主學習探究 — AI × APP × GAS</p>
-      <p class="mt-1 text-slate-400">中央課程與教學輔導諮詢教師 ｜ 桃園市數學輔導團中興國中 李慧玲老師 主講 ｜ 系統支援密碼：049</p>
+      <p class="mt-1 text-slate-400">中央課程與教學輔導諮詢教師 ｜ 桃園市數學輔導團中興國中 李慧玲老師 主講 ｜ 系統門禁密碼：049</p>
+      <p class="mt-1 text-slate-400">Padlet 原網址：<a href="https://reurl.cc/NOKz9k" target="_blank" class="text-blue-500 hover:underline">reurl.cc/NOKz9k</a></p>
     </div>
   </footer>
 
-  <!-- ==================== 知識庫核心資料與邏輯 ==================== -->
+  <!-- ==================== 核心資料與腳本 ==================== -->
   <script>
-    // 完整 36 頁教材資料庫結構
+    // 內嵌 Padlet 完整 31 項目與本地圖片路徑
+    const PADLET_DATA = {"board":{"title":"115南投縣素養研習_Apps Script部署 https://reurl.cc/NOKz9k","url":"https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy","shortUrl":"https://reurl.cc/NOKz9k","creator":{"name":"李慧玲","profileUrl":"https://padlet.com/li11090021_1_1"},"totalPosts":31,"columns":["講義","互動式評量","部署","成果_互動式評量","成果_部署"]},"sections":[{"column":"講義","postCount":3,"posts":[{"index":0,"title":"研習封面與 QR Code","author":"李慧玲","date":"24天 之前","content":"QR Code & Apps Script 研習封面圖片","links":[{"type":"wish_attachment","url":"https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/LNV1Q7KzPnwrQmq3"}],"images":[{"id":"post_0_card","type":"card_image","original_url":"https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/a1e07c84e846507cd8a13728290fd949/__200.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNsw8mhymxTBsXZmzGW2Be-WGfyl9P67BgrjEauMAwkrSohS2X35tJauIQocFxeu3GzWwpa47ija76hKnarYbL0u9NaOnd3QtwF9WJ4inoU8gJg==","local_path":"assets/padlet/post_0_card.png"}]},{"index":1,"title":"講義","author":"李慧玲","date":"24天 之前","content":"115 國中數學領域 數位科技推動自主學習探究","links":[{"type":"pdf_attachment","label":"PDF: 115","url":"https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/PR3NWxyr65P9ab0O"}],"images":[{"id":"post_1_thumb","type":"pdf_thumbnail","original_url":"https://padlet-artifacts.storage.googleapis.com/2f71ea2a4accc376e3d90383dcfbaa1f367068f0/ccbe6c7ec89cdf8fd2caaac4fe9aed0c-h-1e2e6de5b92e64159456d09b805cfbc4.png","local_path":"assets/padlet/post_1_thumb.png"}]},{"index":2,"title":"研習照片","author":"李慧玲","date":"24天 之前","content":"現場研習照片紀錄","links":[{"type":"wish_attachment","url":"https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/PVKBQO03BvjrZj5x"}],"images":[{"id":"post_2_photo","type":"photo_attachment","original_url":"https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/859edd4a7d73670225563393bb1066d3/S__53133318.jpg?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNsxRbXeLqClGK_1LuQ1BXnEDE8duZ-mJTPviXFPE2L4zcIpbxueFLmUTG_Pv3xzfkmuG0jMyydOOlOwplXUkHopObiSQrjl5TV4Pscx-1ycV643rgNax_IxFYaGihnAYVHs=","local_path":"assets/padlet/post_2_photo.jpg"}]}]},{"column":"互動式評量","postCount":3,"posts":[{"index":3,"title":"不只老鼠會打洞","author":"李慧玲","date":"12天 之前","content":"互動評量範例：不只老鼠會打洞","links":[{"type":"gas_app","url":"https://script.google.com/macros/s/AKfycbzoSwkkp3_jgehU5h8K1ilQBprDvrBXJ6DW5fyUedkFglbhCRf_LEfMtZn6WE6xfcOhCg/exec"}],"images":[{"id":"post_3_card","type":"card_image","original_url":"https://padlet-uploads-usc1.storage.googleapis.com/1546636446/f291cdc0bb30752289d351e11b7b73d8/image.png","local_path":"assets/padlet/post_3_card.png"}]},{"index":4,"title":"解一元一次方程式","author":"李慧玲","date":"24天 之前","content":"Gemini - direct access to Google AI\nhttps://share.gemini.google/DCEt33VRtyI2","links":[{"type":"gemini_share","url":"https://gemini.google.com/share/eccbef8f5382?skid=5442deed-a7ff-4e41-a36f-a04cf218f197"},{"type":"gemini_share_short","url":"https://share.gemini.google/DCEt33VRtyI2"}],"images":[{"id":"post_4_card","type":"card_image","original_url":"https://padlet-uploads-usc1.storage.googleapis.com/1546636446/2486c0a77bdd977ab2c56041877ed041/image.png","local_path":"assets/padlet/post_4_card.png"}]},{"index":5,"title":"評量提示詞","author":"李慧玲","date":"24天 之前","content":"你是一個專業的國中數學教師，要設計一個單元的數學評量活動，單元為：解一元一次方程式。首頁要設計者：老李小妹老師，並有學生可以輸入：班級、座號、姓名。題目分為三個關卡，基礎關：5題、進階題：3題、挑戰關：2題，共10題，每題10分，合計100分。每道題目旁要有一個可以點選計算紙，提供學生計算。三個關卡都完成後，要呈現學生在各關卡的答題情況及分數。學生第二次重做時，題目難度一樣，但是題目要不一樣。不要用latex語法，數學公式：請在網頁中使用 KaTeX（或 MathJax）來渲染所有數學公式。確保當頁面載入或數值變動時，數學符號能夠正確且美觀地顯示為標準數學排版，或請使用 display math 格式以確保數學公式的清晰可讀與排版整齊， 最後請用html格式輸出。並使用「響應式網頁設計」(Responsive Web Design) 以及「萬用輸入支援」","links":[],"images":[]}]},{"column":"部署","postCount":3,"posts":[{"index":6,"title":"貼上後端大腦程式碼_code.gs 的用途 & 建立前端互動網頁 Index.html 的功能","author":"李慧玲","date":"12天 之前","content":"code.gs 的用途：不僅負責儲存資料，還包含了「自動批改選擇題邏輯」以及反向去試算表「查詢老師回饋」的搜尋功能。\n請將 Apps Script 預設的程式碼清空，貼上📁Code.gs\nIndex.html 的功能：透過 Mock API 的設計，這段語法就算您直接存成 HTML 檔在電腦上雙擊打開，都能正常呈現模擬資料與動畫！放到 GAS 部署後則會自動轉換為呼叫真實後端資料。\n在左側點擊 + ➔ HTML，命名為 Index，清空預設內容並貼上 🧑💻Index","links":[{"type":"wish_attachment","url":"https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/jpoxajRMpGA4abPE"},{"type":"google_doc_codegs","label":"📁 Code.gs","url":"https://docs.google.com/document/d/1wlVrxXdCPUlA8hqOVpYLicjeQSnvnzTpz80vfG2ZXas/edit?usp=sharing"},{"type":"google_doc_indexhtml","label":"🧑💻 Index.html","url":"https://docs.google.com/document/d/1HObJlf6YgOy7evl4C2Fcm8_jQm5_3F7Bng_EDr64otk/edit?usp=sharing"}],"images":[{"id":"post_6_card","type":"card_image","original_url":"https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/98be505b1d7bdcd02395d74cb56e5b85/image.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNswqrwaPLMhH3wmBlzoWx3xFytK8ovo3v3_UVsyO25I_wsU2E_XPQa4gLHI3_bdUXYv33KP10CqNTphWdmA77HLPER-cST5U9ogweCJIBO2d5g==","local_path":"assets/padlet/post_6_card.png"}]},{"index":7,"title":"發布部署","author":"李慧玲","date":"12天 之前","content":"發布部署\n點擊右上角「部署」➔「新增部署」。\n類型選擇「網頁應用程式」。\n執行身分選「我」，權限選「所有人」。\n部署完成後，去試算表後台看看：\n✨ 您會發現「題庫、名單、考試分頁」已經被系統通通變出來了！學生在前台繳交後，成績也會自動進來！","links":[{"type":"wish_attachment","url":"https://padlet.com/wuqi/115-_apps-script-https-reurl-cc-nokz9k-s024zrw7w21c8ybhiyuy/wish/MbejW1K48PwXQNkG"}],"images":[{"id":"post_7_card","type":"card_image","original_url":"https://u1.padletusercontent.com/uploads/padlet-uploads-usc1/1546636446/9c5afb11d4c6b6ebb63f18629ce8c7ae/image.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8dmxJqYDvE2-MDbblcM-ZrVekXW99RReKkJFIoMoKio1QS_xo4xB__6wEJfa1YNszEUofiEDFsRAYDawyko7DYagA6UW4NEqJaLa_-jnafbl85ZUaI41DKJwTxyv41wveGEXzQUyWBxPDq8b8_Ni_9NDy31fQASTcXQJ50HQvHlQ==","local_path":"assets/padlet/post_7_card.png"}]},{"index":8,"title":"更改prompt中的google sheet ID,複製自己ID的prompt貼回Gemini","author":"李慧玲","date":"24天 之前","content":"我要部署到ＧＡＳ，請讓所有人繳交的檔案，整併在我的google sheet，   我的google sheet ID是：1SCuj58K9RlWgTIyZtCXZ6vf9iufEIw_iUGSEnaL4OmM 請直接將此 ID 寫入程式碼中，不要預留讓我修改的空間。在我的google sheet上先預建立幾個模擬的分頁和內容。   系統要能「完全自動」建立範本與模擬資料，而不需要手動進去編輯器按「執行」code.gs 裡的程式碼。在網頁載入讀取資料時（getInitialData 函數）加入了一個自動偵測機制。只要系統發現的Google Sheet 裡面沒有相對應的分頁，請自動觸發建立並填入模擬資料。     同一個座號填寫者重複測驗時，請跳出提醒視窗，『您已經有成績，請確認是否修改您的成績』。讓使用者按確定按鈕才可以讓他再次提交，但是請不要覆寫資料，直接在此座號的測驗者，下一列存儲格標示『⚠️修改分數』。   前台呈現即時數據時，請呈現真實姓名身份資訊，但是名字中的第二個字以「○」呈現，並進行排名。   請不要呼叫ＡＰＩ的模式，提供我完整的ＧＡＳ程式碼，讓我可以簡單複製貼上即可執行。   部署程式碼請用 📁 符號加上命名告訴我是要貼在『code.gs』 前台請用 🧑💻 加上命名明確告訴我這是貼在『Index』且統一Index的I大寫。   實現 CRUD 功能。   請處理非 GAS 環境中 google is not defined 的問題，加入了能讓網頁在本地預覽時提供模擬測試資料，並在部署到 GAS 後順暢連線到後端。同時將表單重置功能抽離為獨立函式 resetFormAfterSubmit 增加可讀性。\n\n不要複製_prompt模板來源參考：優履團隊","links":[],"images":[]}]},{"column":"成果_互動式評量","postCount":11,"posts":[{"index":9,"title":"福豐國中","author":"秘境探路人","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/rA079gVOZD7d"}],"images":[{"id":"post_9_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/feddc1030b13bab5a9632b162ac984f275e0821a/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_9_card.png"}]},{"index":10,"title":"李慧玲老師 成果分享","author":"李慧玲","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/ROrWVmTzhyrG"}],"images":[{"id":"post_10_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/0f900d4f613fb212cd6744c6d8a9abb08a6016ca/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_10_card.png"}]},{"index":11,"title":"建國國中","author":"建國","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/2EysRbggnmCc"}],"images":[{"id":"post_11_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/bd5ad8471543df77f7960fc3fd70fabf1245ab0b/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_11_card.png"}]},{"index":12,"title":"經國國中","author":"軍佑(經國)","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/aktpNew2do55"}],"images":[{"id":"post_12_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/56e5dcc1968bc55974a22f42866b8fb63fa4af11/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_12_card.png"}]},{"index":13,"title":"桃園國中","author":"桃園國中","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/DGcJ8WnRZUCX"}],"images":[{"id":"post_13_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/debee8bc55a40e4e4567db532887ebb54aacf8d2/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_13_card.png"}]},{"index":14,"title":"慈文國中","author":"Observant Eel","date":"11天 之前","content":"Gemini - direct access to Google AI\nhttps://share.gemini.google/FKOb2iLHHJbr","links":[{"url":"https://share.gemini.google/FKOb2iLHHJbr"}],"images":[{"id":"post_14_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/dd27e94150bb03403a39aec47a92e7d10989c7fc/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_14_card.png"}]},{"index":15,"title":"中興國中","author":"吳育蘋","date":"11天 之前","content":"Google Search - AI Mode","links":[{"url":"https://share.google/aimode/dnkcj7DV5BoEkpqh8"}],"images":[{"id":"post_15_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/5e42e500cad50eebb374434a332b3d3f0bf97ace/bhwebsnap-23fb40d7e064c277dfefcee62ec32472af103027-h-7f898667e113d236dc9f5f41e0af017f.png","local_path":"assets/padlet/post_15_card.png"}]},{"index":16,"title":"建國國中_畢氏定理","author":"陳柏宇","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/SWKw82Uyoz2v"}],"images":[{"id":"post_16_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/ce6385c88656c62032401a9ceb9546ecf4fd5dde/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_16_card.png"}]},{"index":17,"title":"青溪國中","author":"王廷豪","date":"11天 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/Kx8esK7sggDX"}],"images":[{"id":"post_17_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/950b228ec6f86d34328f89c6a1fd8bbb511846e6/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_17_card.png"}]},{"index":18,"title":"大有國中","author":"昌昌","date":"11天 之前","content":"userCodeAppPanel?createOAuthDialog=true","links":[{"url":"https://n-2prjbmhifb2ihndveudzaegrhotzsrrakye3p2y-0lu-script.googleusercontent.com/userCodeAppPanel?createOAuthDialog=true"}],"images":[{"id":"post_18_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/2a99a5ff95282c3f9c6656966d65a4b3882693ed/bhwebsnap-8d75fd580883431143d9a353796f8e1eaa04f78e-h-fd8e0b843055faa833eb23e1ed5176e3.png","local_path":"assets/padlet/post_18_card.png"}]},{"index":19,"title":"11/16 指數律","author":"中興國中","date":"7天 之前","content":"內容是指數律\nGemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/WKlZNxlLMKw6"}],"images":[{"id":"post_19_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/ab77d6d588407ef0290870c2f1fb3661da519b91/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_19_card.png"}]}]},{"column":"成果_部署","postCount":11,"posts":[{"index":20,"title":"宏仁國中","author":"林偉業","date":"20小時 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/XZQhakqMoWVa"}],"images":[{"id":"post_20_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/0dc84752600f1f5937e9588161388d8be16f8dfc/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_20_card.png"}]},{"index":21,"title":"魚池國中","author":"Astral Nomad","date":"20小時 之前","content":"Gemini - direct access to Google AI","links":[{"url":"https://share.gemini.google/tziGijMTOQ1R"}],"images":[{"id":"post_21_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/8bc4ad4d02a7562dcb5cc7c199d6d203dfd86c7b/3847e6aaae9cebd6d2ebb48c81926440-h-737dbc6f6c8564f8bacf8fe6f71f704f.png","local_path":"assets/padlet/post_21_card.png"}]},{"index":22,"title":"建國國中_畢氏定理","author":"陳柏宇","date":"11天 之前","content":"國中數學評量：畢氏定理 - 陳柏宇老師設計","links":[{"url":"https://script.google.com/macros/s/AKfycbzkkicz1i6fTv85sz9_WZFT7Yrbb353nXM4YgGBK_fpYeJAV2S_inXsnUe_X79lfVs/exec"}],"images":[{"id":"post_22_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/875a01994334cbe895ba810302991e9ecac4affb/bhwebsnap-abca37fb84df5705a615c4a6b38c2a22995719d6-h-b50731ba30a7fdeebeb0f7385d0cbbae.png","local_path":"assets/padlet/post_22_card.png"}]},{"index":23,"title":"福豐國中_分數的四則運算","author":"yingxuan","date":"11天 之前","content":"國中數學評量：分數的四則運算｜林萱老師","links":[{"url":"https://script.google.com/macros/s/AKfycbwW6lm0ZHlJgfkONOnSfxOp2n9PpndUarHL9U6zRatZdVMQiVgVt0OEDaPSvJ85PEM5uQ/exec"}],"images":[{"id":"post_23_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/49036c93693a033f1f2bb316ecd93ac3783d327f/bhwebsnap-2300acfdba3dfef112790b73ac25e0b3556d87c9-h-22c58dfe235085338a992e80cd4f1042.png","local_path":"assets/padlet/post_23_card.png"}]},{"index":24,"title":"福豐國中_解一元一次方程式","author":"秘境探路人","date":"11天 之前","content":"解一元一次方程式 - 國中數學線上評量","links":[{"url":"https://script.google.com/macros/s/AKfycbxeN1kcfjxaBSc68kFG2RmnlyYYyBEjmBTx_icGXVWnBwTQkyc-ytHaXHpcJlVkAmKk/exec"}],"images":[{"id":"post_24_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/3725a992b64f06a38e77b3f1c66a9cf02faf5992/bhwebsnap-ef5da8deaffc3d9ef282ddf477a5fc5437c37cd0-h-ae7ffc9415a0f776898431543892abcb.png","local_path":"assets/padlet/post_24_card.png"}]},{"index":25,"title":"經國國中_二次函數","author":"軍佑(經國)","date":"11天 之前","content":"國中數學評量：二次函數 | 劉軍佑老師設計","links":[{"url":"https://script.google.com/macros/s/AKfycbwOJC494gXUoW9_VEb391nqvBhkYCvUPbaoD_6Iv1q2JK_4HTG9AXvpDRokvVPODnhz/exec"}],"images":[{"id":"post_25_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/4bfeb2c201d31a3a32d89dd39894eaf548c10575/bhwebsnap-7c80b32f7da5623ee23ba9243ff4cb3e55211e74-h-acbe9777f076e817f7765b3ecddbec89.png","local_path":"assets/padlet/post_25_card.png"}]},{"index":26,"title":"慈文國中_一元二次方程式","author":"賴佩琳","date":"11天 之前","content":"一元二次方程式闖關評量 - 設計者：Q老師","links":[{"url":"https://script.google.com/macros/s/AKfycbwATB2RIvEw3X9ErmWjHvzakf0WlLSdf8VqX5i62mEtE-Bpb_JHeQHyldduGMCj2VB0/exec"}],"images":[{"id":"post_26_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/8ae323eae9551cc798ca6629a9b4066872abd864/bhwebsnap-178678c77968754b9444d089025a1d21ee7927a1-h-ae7ffc9415a0f776898431543892abcb.png","local_path":"assets/padlet/post_26_card.png"}]},{"index":27,"title":"文昌國中","author":"文昌國中","date":"11天 之前","content":"學生測驗繳交與即時排名系統","links":[{"url":"https://script.google.com/macros/s/AKfycbzPWvsj4uYMTehAJUE6Rhu0mrwi01k0wBnNONOUNB5UOpdZxMyl9JyeHHkSgUTJ8drEJQ/exec"}],"images":[{"id":"post_27_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/5f1fc0e603e7fd72e570a3a14844dbb2f3eeec7b/bhwebsnap-98fa638696d461e2a5c77781e486551f86ba8ac5-h-22c58dfe235085338a992e80cd4f1042.png","local_path":"assets/padlet/post_27_card.png"}]},{"index":28,"title":"青溪國中","author":"王廷豪","date":"11天 之前","content":"解一元一次方程式 - 廷豪老師互動評量系統","links":[{"url":"https://script.google.com/macros/s/AKfycbyyLQaso9f8gz63bGvs8kGYaM18AKNXTqLSK2Qx7q15sGw2LFwkJ_5xv_lG0mJQlzjhmQ/exec"}],"images":[{"id":"post_28_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/6cc4237fcdd5020a725355cd4dc8fa25cb6705a5/bhwebsnap-043ea320d3ff259cc307e8dd2419adc5381e1752-h-22c58dfe235085338a992e80cd4f1042.png","local_path":"assets/padlet/post_28_card.png"}]},{"index":29,"title":"慈文國中","author":"匿名","date":"11天 之前","content":"國中數學互動評量：解一元一次方程式","links":[{"url":"https://script.google.com/macros/s/AKfycbziERZyNKr7lfQwLUmCM2jhZuAF6TTpDfIuBZ5hlvC7UFsEzAN8E56ON06EUJyTqxcb/exec"}],"images":[{"id":"post_29_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/fc8734e6e084b47245918eaeab12fba2c0c671e9/bhwebsnap-8fbca9f66df5ce266ae0840ccaba0468eced1e55-h-ae7ffc9415a0f776898431543892abcb.png","local_path":"assets/padlet/post_29_card.png"}]},{"index":30,"title":"會稽國中_二元一次聯立方程式","author":"移山建設者","date":"11天 之前","content":"國中數學評量：解二元一次聯立方程式｜張嘉言老師","links":[{"url":"https://script.google.com/macros/s/AKfycbzPJj9w4ImabWb1MEcwdSnPeAMKDHaIFZcxWbsv5Tv9QrXuwuLwKKnl5DJGTyvaUyo1Qw/exec"}],"images":[{"id":"post_30_card","type":"card_image","original_url":"https://padlet-artifacts.storage.googleapis.com/62eca62ab38d17b84bdc5dce55971c13d2355e37/bhwebsnap-4e3fdf84cda0ea632578096cc9f6b27051556303-h-b50731ba30a7fdeebeb0f7385d0cbbae.png","local_path":"assets/padlet/post_30_card.png"}]}]}]};
+
+    // 內嵌投影片 36 SLIDES 資料
     const SLIDES_DATA = [
-      {
-        id: 1,
-        slide: 1,
-        category: "prep",
-        title: "首頁封面",
-        badge: "研習主題",
-        summary: "115 國中數學領域 數位科技推動自主學習探究 — AI × APP × GAS",
-        details: "主講人：中央課程與教學輔導諮詢教師、桃園市數學輔導團中興國中 李慧玲老師。核心精神為將生成式 AI、行動互動 APP 與 Google 雲端試算表 (GAS) 深度整合，提供教師快速賦能的自主學習解決方案。",
-        tags: ["封面", "李慧玲老師", "自主學習", "AI", "GAS"]
-      },
-      {
-        id: 2,
-        slide: 2,
-        category: "prep",
-        title: "請先登入 gmail 帳號",
-        badge: "帳號設定",
-        summary: "建議使用個人帳號或教育局帳號，強烈不建議使用學校網域帳號",
-        details: "個人帳號 (@gmail.com) 或教育局帳號 (報研習帳號 @ms.tyc.edu.tw)。\n⚠️ 注意事項：不建議使用學校給的帳號 (@dyjhs.tyc.edu.tw 等)，因為學校網域有資安外掛與發布 Web App 的限制。",
-        tags: ["Gmail", "教育局帳號", "資安限制", "帳號選擇"],
-        warning: "切勿使用學校給的網域帳號，會限制外部 App Script 部署與共用存取權！"
-      },
-      {
-        id: 3,
-        slide: 3,
-        category: "prep",
-        title: "登入 gmail 帳號後進入 Gemini",
-        badge: "AI 入口",
-        summary: "從 Google 應用程式九宮格選取 Gemini",
-        details: "進入 https://gemini.google.com/。左下角確認出現 e-mail 使用者名稱，表示已正確登入。務必確認已完成 Gmail 登入再進行後續所有操作。",
-        tags: ["Gemini", "九宮格", "登入確認"]
-      },
-      {
-        id: 4,
-        slide: 4,
-        category: "prep",
-        title: "進入 Padlet 協作畫面",
-        badge: "任務平台",
-        summary: "研習協作牆專欄結構說明",
-        details: "Padlet 四大專欄說明：\n1.「互動式評量」：教師領取評量提示詞。\n2.「部門」：查看共用試算表 ID 與部署指令。\n3.「成果_互動式評量」：上傳 Gemini Canvas 公開分享網址。\n4.「成果_部門」：上傳完成 GAS 部署的後台正式遊戲網址。",
-        tags: ["Padlet", "互動式評量", "成果上傳", "協作"]
-      },
-      {
-        id: 5,
-        slide: 5,
-        category: "prep",
-        title: "開始前 Gemini 工具設定",
-        badge: "Canvas 啟用",
-        summary: "在 Gemini 對話框中開啟 Canvas 模式",
-        details: "進入 Gemini 後，點擊「問問 Gemini / 多上傳選項」，在功能選單中點選「Canvas」（撰寫、寫程式或製作簡報）。右上角顯示「Gemini 自動」，Canvas 能即時於右側分欄預覽產生的互動式網頁應用程式。",
-        tags: ["Gemini", "Canvas", "工具模式", "程式預覽"]
-      },
-      {
-        id: 6,
-        slide: 6,
-        category: "step1",
-        title: "1. 生成一個數學評量活動 APP",
-        badge: "提示詞實作",
-        summary: "複製 Padlet 上的評量提示詞到 Gemini，客製化單元與教師",
-        details: "核心提示詞規範：專業國中數學教師角色、指定單元（如解一元一次方程式）、設計者姓名、學生輸入班級/座號/姓名、三大關卡（基礎 5 題、進階 3 題、挑戰 2 題共 100 分）、附手寫計算紙、呈現各關答題情況、二次重做題目動態變換、使用 KaTeX/MathJax 渲染公式。",
-        tags: ["評量提示詞", "一元一次方程式", "計算紙", "KaTeX", "三關卡"],
-        isPrompt: true
-      },
-      {
-        id: 7,
-        slide: 7,
-        category: "step1",
-        title: "2. APP 網址上傳 Padlet",
-        badge: "分享成果",
-        summary: "複製 Canvas 公開分享連結並繳交第一階段作業",
-        details: "在 Canvas 預覽滿意後，點擊右上角「分享」按鈕，取得公開分享連結（如 share.gemini.google/TpRZRFS9JH34），貼至 Padlet 的「成果_互動式評量」專欄。",
-        tags: ["Canvas 分享", "公開連結", "Padlet 上傳"]
-      },
-      {
-        id: 8,
-        slide: 8,
-        category: "step2",
-        title: "3. 建立一個雲端試算表",
-        badge: "試算表資料庫",
-        summary: "透過九宮格建立全新的 Google 試算表",
-        details: "點擊 Google 九宮格 -> 選擇「Google 試算表」 -> 點擊「開始建立新試算表」（＋空白試算表）。這個試算表將作為後續儲存全班作答成績的即時資料庫。",
-        tags: ["Google 試算表", "建立表格", "資料庫"]
-      },
-      {
-        id: 9,
-        slide: 9,
-        category: "step2",
-        title: "4. 試算表命名及共用",
-        badge: "權限設定",
-        summary: "重新命名試算表，並設定任何人檢視權限",
-        details: "1. 將左上角「未命名的試算表」改為教學單元名稱（例如：「等量公理」）。\n2. 點擊右上角「共用」按鈕。\n3. 在一般存取權中，將「限制」改為「知道連結的任何人」：角色選擇「檢視者」。點選「完成」。",
-        tags: ["試算表命名", "共用設定", "知道連結的任何人", "檢視者"]
-      },
-      {
-        id: 10,
-        slide: 10,
-        category: "step2",
-        title: "5. 擷取「Google Sheet ID」",
-        badge: "ID 擷取",
-        summary: "從試算表 URL 中精準擷取專屬識別碼",
-        details: "試算表網址格式為：https://docs.google.com/spreadsheets/d/【ID】/edit?usp=sharing。\n擷取 /d/ 後面這段到 /edit 之間的一長串亂碼字串（例如：1SeihVjLWtEZF4KrbtBukPqiyo4Km_0-kdcj21ee1Ex8）。",
-        tags: ["Sheet ID", "網址擷取", "試算表代碼"]
-      },
-      {
-        id: 11,
-        slide: 11,
-        category: "step3",
-        title: "6. 部署 GAS(1) - 核心指令",
-        badge: "後端全自動指令",
-        summary: "向 Gemini 下達整合 Google Sheet ID 的全自動部署指令",
-        details: "將 Sheet ID 寫死在代碼中、全自動建立分頁與模擬資料免手動執行、getInitialData 自動偵測建立分頁、同座號重複測驗彈窗提醒且次列標註『⚠修改分數』、前台即時隨機代碼英雄榜、防呆處理非 GAS 環境 google is not defined、標註 📄 code.gs 與 💻 Index（I大寫）。",
-        tags: ["GAS 指令", "Sheet ID", "自動建立分頁", "重複測驗標註", "隨機代碼", "防呆"],
-        isPrompt: true
-      },
-      {
-        id: 12,
-        slide: 12,
-        category: "step3",
-        title: "6. 部署 GAS(2) - Gemini 下指令",
-        badge: "Canvas 模式",
-        summary: "回到剛剛的數學遊戲對話視窗，送出 GAS 整合指令",
-        details: "回到剛剛產生的數學遊戲 APP，將前一頁的指令與自己的 Sheet ID 複製貼上，切記生成模式維持 Canvas，讓 AI 重新改寫代碼為後端 GAS + 前端 HTML 雙架構。",
-        tags: ["Gemini 下指令", "回到對話", "Canvas 模式"]
-      },
-      {
-        id: 13,
-        slide: 13,
-        category: "step3",
-        title: "6. 部署 GAS(3) - Gemini 指令結果",
-        badge: "雙檔生成",
-        summary: "Gemini 產出 Code.gs 後端與 Index.html 前端程式碼",
-        details: "Gemini 回覆：已將原本單一檔案結構轉換為 GAS 支援的 HTML/JS 格式，包含 Code.gs（後端資料庫 CRUD 與分頁初始化）與 Index.html（前端 React/Tailwind/Lucide/KaTeX）。",
-        tags: ["Code.gs", "Index.html", "後端", "前端", "架構拆分"]
-      },
-      {
-        id: 14,
-        slide: 14,
-        category: "step3",
-        title: "6. 部署 GAS(4) - 複製 Code 程式碼",
-        badge: "複製代碼",
-        summary: "點選複製內容，取得後端 Code.gs 程式碼",
-        details: "點擊分享按鈕旁的「複製內容」按鈕，將後端 Code.gs 程式碼複製到剪貼簿，準備貼入 Google Apps Script 編輯器。",
-        tags: ["複製代碼", "Code.gs", "後端代碼"]
-      },
-      {
-        id: 15,
-        slide: 15,
-        category: "step4",
-        title: "6. 部署 GAS(5) - 進入擴充功能",
-        badge: "開啟 GAS",
-        summary: "從試算表選單開啟 Apps Script 編輯器",
-        details: "打開已建立的 Google 試算表（如等量公理）-> 點擊上方選單「擴充功能」 -> 點選「Apps Script」。",
-        tags: ["擴充功能", "Apps Script", "試算表整合"]
-      },
-      {
-        id: 16,
-        slide: 16,
-        category: "step4",
-        title: "第二步 ｜ 貼上程式碼並儲存專案流程",
-        badge: "步驟總覽",
-        summary: "四步核心流程圖：開啟 AS → 貼 Code.gs → 新增 Index.html → 儲存專案",
-        details: "1. 開啟 Apps Script。\n2. 點選左側 Code.gs，刪除右側原內容，貼上 Code.gs 代碼。\n3. 點擊「＋」新增 HTML，檔名命名為「Index」（I 務必大寫），清空後貼上 HTML 代碼。\n4. 點擊工具列磁碟片圖示「儲存專案」。",
-        tags: ["流程圖", "貼上代碼", "儲存專案", "Index 大寫"]
-      },
-      {
-        id: 17,
-        slide: 17,
-        category: "step4",
-        title: "6. 部署 GAS(6) - AS 程式碼貼上",
-        badge: "後端貼上",
-        summary: "在 Apps Script 專案中全部清空並貼入 Code.gs",
-        details: "在預設的「程式碼.gs」中，刪除原本的 `function myFunction() {}`，將複製的 Code.gs 完整貼上。檢查第 6 列 SPREADSHEET_ID 是否已帶入自己的試算表 ID。",
-        tags: ["Code.gs", "全部清空", "程式碼貼上", "檢查 ID"]
-      },
-      {
-        id: 18,
-        slide: 18,
-        category: "step4",
-        title: "6. 部署 GAS(7) - 前端設定",
-        badge: "新增 HTML",
-        summary: "點選「＋」新增 HTML 檔案，命名為 Index（I 大寫）",
-        details: "1. 點擊檔案列表上方的「＋」加號。\n2. 選擇「HTML」。\n3. 更改檔案名稱為「Index」。（特別注意：第一字母 I 一定要大寫，否則 GAS 系統呼叫會找不到檔案）。",
-        tags: ["新增檔案", "HTML", "Index 大寫", "檔名命名"],
-        warning: "檔名必須是「Index」，首字大寫！如果是小寫 index 會導致 404 找不到檔案！"
-      },
-      {
-        id: 19,
-        slide: 19,
-        category: "step4",
-        title: "6. 部署 GAS(8) - Index 設定畫面",
-        badge: "清空預設",
-        summary: "進入 Index.html 畫面，全部清空預設內容",
-        details: "新增 Index.html 後，右側會出現預設的 HTML 骨架標籤。請全選並刪除全部清空，準備回到 Gemini 複製前端代碼貼入。",
-        tags: ["Index.html", "全部清空", "編輯畫面"]
-      },
-      {
-        id: 20,
-        slide: 20,
-        category: "step4",
-        title: "6. 部署 GAS(9) - 複製 Index 程式碼",
-        badge: "複製前端",
-        summary: "回到 Gemini Canvas 複製 Index.html 完整代碼",
-        details: "Index.html 整合了 React、Tailwind CSS、Lucide Icons，並透過 google.script.run 處理與後端 GAS 函數的非同步連線，同時保留本地預覽防呆機制。",
-        tags: ["複製前端", "React", "Tailwind", "google.script.run"]
-      },
-      {
-        id: 21,
-        slide: 21,
-        category: "step4",
-        title: "6. 部署 GAS(9) - 複製 Index（另一畫面）",
-        badge: "複製代碼",
-        summary: "Frontend Application 視窗中展開代碼與複製",
-        details: "若 Gemini 畫面呈現為前端預覽框，點擊上方「程式碼」按鈕展開原始碼視窗，再點擊「複製內容」按鈕。",
-        tags: ["複製介面", "Frontend", "原始碼"]
-      },
-      {
-        id: 22,
-        slide: 22,
-        category: "step4",
-        title: "6. 部署 GAS(10) - 貼上 Index 程式碼",
-        badge: "貼上前台",
-        summary: "在 Index.html 編輯區貼上完整前端代碼",
-        details: "切回 Apps Script 的 Index.html，將剛剛複製的完整 HTML 代碼貼上。",
-        tags: ["貼上代碼", "Index.html", "完成貼入"]
-      },
-      {
-        id: 23,
-        slide: 23,
-        category: "step4",
-        title: "6. 部署 GAS(11) - 專案命名與儲存",
-        badge: "專案命名",
-        summary: "修改專案名稱為「等量公理」並按下儲存磁碟",
-        details: "點擊左上方「未命名的專案」，改為例如「等量公理」。確認上方出現「已儲存至雲端硬碟」，或點擊磁碟圖示確認存檔。",
-        tags: ["專案命名", "儲存專案", "存檔確認"]
-      },
-      {
-        id: 24,
-        slide: 24,
-        category: "step5",
-        title: "第三步 ｜ 發布部署（最關鍵的設定）",
-        badge: "關鍵步驟",
-        summary: "新增部署作業四步流程與兩大必選設定",
-        details: "1. 新增部署作業。\n2. 選擇部署類型：齒輪圖示選「網頁應用程式」。\n3. ⚠️ 設定執行身分：務必選「我」。\n4. ⚠️ 設定誰可以存取：務必選「所有人」。\n設定正確後按下「部署」進入授權！",
-        tags: ["發布部署", "執行身分: 我", "誰可以存取: 所有人", "最關鍵設定"],
-        warning: "兩大必選設定：執行身分＝我 ｜ 誰可以存取＝所有人。若選錯，學生將無法作答！"
-      },
-      {
-        id: 25,
-        slide: 25,
-        category: "step5",
-        title: "6. 部署 GAS(12) - 專案部署",
-        badge: "選取類型",
-        summary: "點選右上角部署 -> 新增部署作業 -> 網頁應用程式",
-        details: "在 Apps Script 右上角點擊藍色「部署」按鈕，選擇「新增部署作業」。點擊左側「選取類型」齒輪圖示，選擇「網頁應用程式」。",
-        tags: ["新增部署作業", "齒輪圖示", "網頁應用程式"]
-      },
-      {
-        id: 26,
-        slide: 26,
-        category: "step5",
-        title: "6. 部署 GAS(13) - 專案存取設定",
-        badge: "身分與權限",
-        summary: "設定說明文字、執行身分為我、誰可以存取為所有人",
-        details: "新增說明文字（如「等量公理初版」）。執行身分確認為自己的帳號。誰可以存取下拉選單切換至「所有人」，最後點擊右下角「部署」按鈕。",
-        tags: ["存取設定", "執行身分", "所有人", "點擊部署"]
-      },
-      {
-        id: 27,
-        slide: 27,
-        category: "step5",
-        title: "6. 部署 GAS(14) - 專案授予存取權",
-        badge: "安全性警告",
-        summary: "點選授予存取權，面對 Google 未驗證提示點選 Advanced",
-        details: "彈出「網頁應用程式要求您授予資料存取權」，點擊「授予存取權」。出現「Google hasn't verified this app」(Google 尚未驗證此應用程式) 警告畫面時，點選左下角的「Advanced」(進階)。",
-        tags: ["授予存取權", "未驗證警告", "Advanced", "進階選項"]
-      },
-      {
-        id: 28,
-        slide: 28,
-        category: "step5",
-        title: "6. 部署 GAS(15) - 前往不安全連結",
-        badge: "繞過警告",
-        summary: "在進階選單中點選 Go to 等量公理 (unsafe)",
-        details: "展開進階說明後，點選最下方的文字連結：「Go to 等量公理 (unsafe)」(前往專案名稱(不安全))。這是自建專案的正常授權流程。",
-        tags: ["unsafe", "前往專案", "進階授權"]
-      },
-      {
-        id: 29,
-        slide: 29,
-        category: "step5",
-        title: "6. 部署 GAS(16) - 允許存取權限",
-        badge: "最後許可",
-        summary: "滾動至底部點選 Continue 或 Allow 允許存取 Google 帳戶",
-        details: "進入權限確認頁面（等量公理 wants access to your Google Account），滾動至最下方點選「Continue」或「Allow」(允許)。",
-        tags: ["允許存取", "Continue", "Allow", "授權完成"]
-      },
-      {
-        id: 30,
-        slide: 30,
-        category: "step5",
-        title: "6. 部署 GAS(17) - 專案部署成功",
-        badge: "取得網址",
-        summary: "顯示部署成功，複製產生的網頁應用程式正式網址",
-        details: "畫面顯示「專案部署成功」或「已成功更新部署作業」，複製下方長度包含 /exec 的「網頁應用程式網址」，點擊「完成」。",
-        tags: ["部署成功", "網頁應用程式網址", "exec", "複製網址"]
-      },
-      {
-        id: 31,
-        slide: 31,
-        category: "step6",
-        title: "6. 部署 GAS(18) - 遊戲網址測試",
-        badge: "上線測試",
-        summary: "在新分頁開啟遊戲網址，實測登入與英雄榜連線",
-        details: "在瀏覽器新分頁貼上剛剛複製的網址，成功開啟「天平守護者 等量公理大冒險」或您的單元應用程式，確認英雄榜正常載入，點選登入開始測驗。",
-        tags: ["遊戲網址", "線上測試", "英雄榜連線"]
-      },
-      {
-        id: 32,
-        slide: 32,
-        category: "step6",
-        title: "6. 部署 GAS(19) - 確定部署成功",
-        badge: "後台驗收",
-        summary: "查看 Google 試算表，自動建立「成績紀錄」分頁",
-        details: "打開你的 Google 試算表，確認底部自動出現「成績紀錄」分頁！表頭自動包含：提交時間、班級、座號、暱稱、隨機代碼、總分、加法(20)、減法(20)...等，並已成功寫入測試資料。",
-        tags: ["成績紀錄", "自動建立分頁", "試算表驗收", "部署成功確認"]
-      },
-      {
-        id: 33,
-        slide: 33,
-        category: "step6",
-        title: "遊戲網址在哪裡？",
-        badge: "日常管理",
-        summary: "引導教師關閉視窗後如何重新找回遊戲網址",
-        details: "很多老師在部署完關閉視窗後不知道如何再次查看或分享遊戲網址。講義特別提供兩步驟找回流程。",
-        tags: ["找回網址", "忘記網址", "操作指引"]
-      },
-      {
-        id: 34,
-        slide: 34,
-        category: "step6",
-        title: "6. 部署 GAS(20) - 從試算表進入部署",
-        badge: "管理部署",
-        summary: "試算表 -> 擴充功能 -> Apps Script -> 部署 -> 管理部署作業",
-        details: "1. 從試算表上方選單點選「擴充功能」 -> 「Apps Script」。\n2. 點擊右上角「部署」按鈕旁邊的下拉箭頭。\n3. 點選「管理部署作業」。",
-        tags: ["管理部署作業", "擴充功能", "進入選單"]
-      },
-      {
-        id: 35,
-        slide: 35,
-        category: "step6",
-        title: "6. 部署 GAS(21) - 在管理部署找網址",
-        badge: "複製網址",
-        summary: "在管理部署視窗中複製網頁應用程式網址，上傳至 Padlet",
-        details: "在彈出的「管理部署作業」視窗中，點擊網頁應用程式底下的「網址」旁的「複製」圖示。複製後回到 Padlet，將網址貼入「成果_部門」專欄完成研習檢核！",
-        tags: ["管理部署", "複製網址", "Padlet 成果_部門", "研習結案"]
-      },
-      {
-        id: 36,
-        slide: 36,
-        category: "step6",
-        title: "研習總結與 Q&A",
-        badge: "結語問答",
-        summary: "115 國中數學領域 數位科技推動自主學習探究 Q&A",
-        details: "恭喜完成 AI × APP × GAS 全套工作流程！透過此套件，教師能以零成本、不寫一行艱深代碼的方式，為國中數學各單元量身打造專屬的互動自主學習與成效追蹤系統。",
-        tags: ["總結", "Q&A", "李慧玲老師", "自主學習推動"]
-      }
+      { id: 1, slide: 1, category: "prep", title: "首頁封面", badge: "研習主題", summary: "115 國中數學領域 數位科技推動自主學習探究 — AI × APP × GAS", details: "主講人：中央課程與教學輔導諮詢教師、桃園市數學輔導團中興國中 李慧玲老師。核心精神為將生成式 AI、行動互動 APP 與 Google 雲端試算表 (GAS) 深度整合，提供教師快速賦能的自主學習解決方案。", tags: ["封面", "李慧玲老師", "自主學習", "AI", "GAS"] },
+      { id: 2, slide: 2, category: "prep", title: "請先登入 gmail 帳號", badge: "帳號設定", summary: "建議使用個人帳號或教育局帳號，強烈不建議使用學校網域帳號", details: "個人帳號 (@gmail.com) 或教育局帳號 (報研習帳號 @ms.tyc.edu.tw)。\n⚠️ 注意事項：不建議使用學校給的帳號 (@dyjhs.tyc.edu.tw 等)，因為學校網域有資安外掛與發布 Web App 的限制。", tags: ["Gmail", "教育局帳號", "資安限制", "帳號選擇"], warning: "切勿使用學校給的網域帳號，會限制外部 App Script 部署與共用存取權！" },
+      { id: 3, slide: 3, category: "prep", title: "登入 gmail 帳號後進入 Gemini", badge: "AI 入口", summary: "從 Google 應用程式九宮格選取 Gemini", details: "進入 https://gemini.google.com/。左下角確認出現 e-mail 使用者名稱，表示已正確登入。務必確認已完成 Gmail 登入再進行後續所有操作。", tags: ["Gemini", "九宮格", "登入確認"] },
+      { id: 4, slide: 4, category: "prep", title: "進入 Padlet 協作畫面", badge: "任務平台", summary: "研習協作牆專欄結構說明", details: "Padlet 四大專欄說明：\n1.「互動式評量」：教師領取評量提示詞。\n2.「部門」：查看共用試算表 ID 與部署指令。\n3.「成果_互動式評量」：上傳 Gemini Canvas 公開分享網址。\n4.「成果_部門」：上傳完成 GAS 部署的後台正式遊戲網址。", tags: ["Padlet", "互動式評量", "成果上傳", "協作"] },
+      { id: 5, slide: 5, category: "prep", title: "開始前 Gemini 工具設定", badge: "Canvas 啟用", summary: "在 Gemini 對話框中開啟 Canvas 模式", details: "進入 Gemini 後，點擊「問問 Gemini / 多上傳選項」，在功能選單中點選「Canvas」（撰寫、寫程式或製作簡報）。右上角顯示「Gemini 自動」，Canvas 能即時於右側分欄預覽產生的互動式網頁應用程式。", tags: ["Gemini", "Canvas", "工具模式", "程式預覽"] },
+      { id: 6, slide: 6, category: "step1", title: "1. 生成一個數學評量活動 APP", badge: "提示詞實作", summary: "複製 Padlet 上的評量提示詞到 Gemini，客製化單元與教師", details: "核心提示詞規範：專業國中數學教師角色、指定單元（如解一元一次方程式）、設計者姓名、學生輸入班級/座號/姓名、三大關卡（基礎 5 題、進階 3 題、挑戰 2 題共 100 分）、附手寫計算紙、呈現各關答題情況、二次重做題目動態變換、使用 KaTeX/MathJax 渲染公式。", tags: ["評量提示詞", "一元一次方程式", "計算紙", "KaTeX", "三關卡"], isPrompt: true },
+      { id: 7, slide: 7, category: "step1", title: "2. APP 網址上傳 Padlet", badge: "分享成果", summary: "複製 Canvas 公開分享連結並繳交第一階段作業", details: "在 Canvas 預覽滿意後，點擊右上角「分享」按鈕，取得公開分享連結（如 share.gemini.google/TpRZRFS9JH34），貼至 Padlet 的「成果_互動式評量」專欄。", tags: ["Canvas 分享", "公開連結", "Padlet 上傳"] },
+      { id: 8, slide: 8, category: "step2", title: "3. 建立一個雲端試算表", badge: "試算表資料庫", summary: "透過九宮格建立全新的 Google 試算表", details: "點擊 Google 九宮格 -> 選擇「Google 試算表」 -> 點擊「開始建立新試算表」（＋空白試算表）。這個試算表將作為後續儲存全班作答成績的即時資料庫。", tags: ["Google 試算表", "建立表格", "資料庫"] },
+      { id: 9, slide: 9, category: "step2", title: "4. 試算表命名及共用", badge: "權限設定", summary: "重新命名試算表，並設定任何人檢視權限", details: "1. 將左上角「未命名的試算表」改為教學單元名稱（例如：「等量公理」）。\n2. 點擊右上角「共用」按鈕。\n3. 在一般存取權中，將「限制」改為「知道連結的任何人」：角色選擇「檢視者」。點選「完成」。", tags: ["試算表命名", "共用設定", "知道連結的任何人", "檢視者"] },
+      { id: 10, slide: 10, category: "step2", title: "5. 擷取「Google Sheet ID」", badge: "ID 擷取", summary: "從試算表 URL 中精準擷取專屬識別碼", details: "試算表網址格式為：https://docs.google.com/spreadsheets/d/【ID】/edit?usp=sharing。\n擷取 /d/ 後面這段到 /edit 之間的一長串亂碼字串（例如：1SeihVjLWtEZF4KrbtBukPqiyo4Km_0-kdcj21ee1Ex8）。", tags: ["Sheet ID", "網址擷取", "試算表代碼"] },
+      { id: 11, slide: 11, category: "step3", title: "6. 部署 GAS(1) - 核心指令", badge: "後端全自動指令", summary: "向 Gemini 下達整合 Google Sheet ID 的全自動部署指令", details: "將 Sheet ID 寫死在代碼中、全自動建立分頁與模擬資料免手動執行、getInitialData 自動偵測建立分頁、同座號重複測驗彈窗提醒且次列標註『⚠修改分數』、前台即時隨機代碼英雄榜、防呆處理非 GAS 環境 google is not defined、標註 📄 code.gs 與 💻 Index（I大寫）。", tags: ["GAS 指令", "Sheet ID", "自動建立分頁", "重複測驗標註", "隨機代碼", "防呆"], isPrompt: true },
+      { id: 12, slide: 12, category: "step3", title: "6. 部署 GAS(2) - Gemini 下指令", badge: "Canvas 模式", summary: "回到剛剛的數學遊戲對話視窗，送出 GAS 整合指令", details: "回到剛剛產生的數學遊戲 APP，將前一頁的指令與自己的 Sheet ID 複製貼上，切記生成模式維持 Canvas，讓 AI 重新改寫代碼為後端 GAS + 前端 HTML 雙架構。", tags: ["Gemini 下指令", "回到對話", "Canvas 模式"] },
+      { id: 13, slide: 13, category: "step3", title: "6. 部署 GAS(3) - Gemini 指令結果", badge: "雙檔生成", summary: "Gemini 產出 Code.gs 後端與 Index.html 前端程式碼", details: "Gemini 回覆：已將原本單一檔案結構轉換為 GAS 支援的 HTML/JS 格式，包含 Code.gs（後端資料庫 CRUD 與分頁初始化）與 Index.html（前端 React/Tailwind/Lucide/KaTeX）。", tags: ["Code.gs", "Index.html", "後端", "前端", "架構拆分"] },
+      { id: 14, slide: 14, category: "step3", title: "6. 部署 GAS(4) - 複製 Code 程式碼", badge: "複製代碼", summary: "點選複製內容，取得後端 Code.gs 程式碼", details: "點擊分享按鈕旁的「複製內容」按鈕，將後端 Code.gs 程式碼複製到剪貼簿，準備貼入 Google Apps Script 編輯器。", tags: ["複製代碼", "Code.gs", "後端代碼"] },
+      { id: 15, slide: 15, category: "step4", title: "6. 部署 GAS(5) - 進入擴充功能", badge: "開啟 GAS", summary: "從試算表選單開啟 Apps Script 編輯器", details: "打開已建立的 Google 試算表（如等量公理）-> 點擊上方選單「擴充功能」 -> 點選「Apps Script」。", tags: ["擴充功能", "Apps Script", "試算表整合"] },
+      { id: 16, slide: 16, category: "step4", title: "第二步 ｜ 貼上程式碼並儲存專案流程", badge: "步驟總覽", summary: "四步核心流程圖：開啟 AS → 貼 Code.gs → 新增 Index.html → 儲存專案", details: "1. 開啟 Apps Script。\n2. 點選左側 Code.gs，刪除右側原內容，貼上 Code.gs 代碼。\n3. 點擊「＋」新增 HTML，檔名命名為「Index」（I 務必大寫），清空後貼上 HTML 代碼。\n4. 點擊工具列磁碟片圖示「儲存專案」。", tags: ["流程圖", "貼上代碼", "儲存專案", "Index 大寫"] },
+      { id: 17, slide: 17, category: "step4", title: "6. 部署 GAS(6) - AS 程式碼貼上", badge: "後端貼上", summary: "在 Apps Script 專案中全部清空並貼入 Code.gs", details: "在預設的「程式碼.gs」中，刪除原本的 function myFunction() {}，將複製的 Code.gs 完整貼上。檢查第 6 列 SPREADSHEET_ID 是否已帶入自己的試算表 ID。", tags: ["Code.gs", "全部清空", "程式碼貼上", "檢查 ID"] },
+      { id: 18, slide: 18, category: "step4", title: "6. 部署 GAS(7) - 前端設定", badge: "新增 HTML", summary: "點選「＋」新增 HTML 檔案，命名為 Index（I 大寫）", details: "1. 點擊檔案列表上方的「＋」加號。\n2. 選擇「HTML」。\n3. 更改檔案名稱為「Index」。（特別注意：第一字母 I 一定要大寫，否則 GAS 系統呼叫會找不到檔案）。", tags: ["新增檔案", "HTML", "Index 大寫", "檔名命名"], warning: "檔名必須是「Index」，首字大寫！如果是小寫 index 會導致 404 找不到檔案！" },
+      { id: 19, slide: 19, category: "step4", title: "6. 部署 GAS(8) - Index 設定畫面", badge: "清空預設", summary: "進入 Index.html 畫面，全部清空預設內容", details: "新增 Index.html 後，右側會出現預設的 HTML 骨架標籤。請全選並刪除全部清空，準備回到 Gemini 複製前端代碼貼入。", tags: ["Index.html", "全部清空", "編輯畫面"] },
+      { id: 20, slide: 20, category: "step4", title: "6. 部署 GAS(9) - 複製 Index 程式碼", badge: "複製前端", summary: "回到 Gemini Canvas 複製 Index.html 完整代碼", details: "Index.html 整合了 React、Tailwind CSS、Lucide Icons，並透過 google.script.run 處理與後端 GAS 函數的非同步連線，同時保留本地預覽防呆機制。", tags: ["複製前端", "React", "Tailwind", "google.script.run"] },
+      { id: 21, slide: 21, category: "step4", title: "6. 部署 GAS(9) - 複製 Index（另一畫面）", badge: "複製代碼", summary: "Frontend Application 視窗中展開代碼與複製", details: "若 Gemini 畫面呈現為前端預覽框，點擊上方「程式碼」按鈕展開原始碼視窗，再點擊「複製內容」按鈕。", tags: ["複製介面", "Frontend", "原始碼"] },
+      { id: 22, slide: 22, category: "step4", title: "6. 部署 GAS(10) - 貼上 Index 程式碼", badge: "貼上前台", summary: "在 Index.html 編輯區貼上完整前端代碼", details: "切回 Apps Script 的 Index.html，將剛剛複製的完整 HTML 代碼貼上。", tags: ["貼上代碼", "Index.html", "完成貼入"] },
+      { id: 23, slide: 23, category: "step4", title: "6. 部署 GAS(11) - 專案命名與儲存", badge: "專案命名", summary: "修改專案名稱為「等量公理」並按下儲存磁碟", details: "點擊左上方「未命名的專案」，改為例如「等量公理」。確認上方出現「已儲存至雲端硬碟」，或點擊磁碟圖示確認存檔。", tags: ["專案命名", "儲存專案", "存檔確認"] },
+      { id: 24, slide: 24, category: "step5", title: "第三步 ｜ 發布部署（最關鍵的設定）", badge: "關鍵步驟", summary: "新增部署作業四步流程與兩大必選設定", details: "1. 新增部署作業。\n2. 選擇部署類型：齒輪圖示選「網頁應用程式」。\n3. ⚠️ 設定執行身分：務必選「我」。\n4. ⚠️ 設定誰可以存取：務必選「所有人」。\n設定正確後按下「部署」進入授權！", tags: ["發布部署", "執行身分: 我", "誰可以存取: 所有人", "最關鍵設定"], warning: "兩大必選設定：執行身分＝我 ｜ 誰可以存取＝所有人。若選錯，學生將無法作答！" },
+      { id: 25, slide: 25, category: "step5", title: "6. 部署 GAS(12) - 專案部署", badge: "選取類型", summary: "點選右上角部署 -> 新增部署作業 -> 網頁應用程式", details: "在 Apps Script 右上角點擊藍色「部署」按鈕，選擇「新增部署作業」。點擊左側「選取類型」齒輪圖示，選擇「網頁應用程式」。", tags: ["新增部署作業", "齒輪圖示", "網頁應用程式"] },
+      { id: 26, slide: 26, category: "step5", title: "6. 部署 GAS(13) - 專案存取設定", badge: "身分與權限", summary: "設定說明文字、執行身分為我、誰可以存取為所有人", details: "新增說明文字（如「等量公理初版」）。執行身分確認為自己的帳號。誰可以存取下拉選單切換至「所有人」，最後點擊右下角「部署」按鈕。", tags: ["存取設定", "執行身分", "所有人", "點擊部署"] },
+      { id: 27, slide: 27, category: "step5", title: "6. 部署 GAS(14) - 專案授予存取權", badge: "安全性警告", summary: "點選授予存取權，面對 Google 未驗證提示點選 Advanced", details: "彈出「網頁應用程式要求您授予資料存取權」，點擊「授予存取權」。出現「Google hasn't verified this app」(Google 尚未驗證此應用程式) 警告畫面時，點選左下角的「Advanced」(進階)。", tags: ["授予存取權", "未驗證警告", "Advanced", "進階選項"] },
+      { id: 28, slide: 28, category: "step5", title: "6. 部署 GAS(15) - 前往不安全連結", badge: "繞過警告", summary: "在進階選單中點選 Go to 等量公理 (unsafe)", details: "展開進階說明後，點選最下方的文字連結：「Go to 等量公理 (unsafe)」(前往專案名稱(不安全))。這是自建專案的正常授權流程。", tags: ["unsafe", "前往專案", "進階授權"] },
+      { id: 29, slide: 29, category: "step5", title: "6. 部署 GAS(16) - 允許存取權限", badge: "最後許可", summary: "滾動至底部點選 Continue 或 Allow 允許存取 Google 帳戶", details: "進入權限確認頁面（等量公理 wants access to your Google Account），滾動至最下方點選「Continue」或「Allow」(允許)。", tags: ["允許存取", "Continue", "Allow", "授權完成"] },
+      { id: 30, slide: 30, category: "step5", title: "6. 部署 GAS(17) - 專案部署成功", badge: "取得網址", summary: "顯示部署成功，複製產生的網頁應用程式正式網址", details: "畫面顯示「專案部署成功」或「已成功更新部署作業」，複製下方長度包含 /exec 的「網頁應用程式網址」，點擊「完成」。", tags: ["部署成功", "網頁應用程式網址", "exec", "複製網址"] },
+      { id: 31, slide: 31, category: "step6", title: "6. 部署 GAS(18) - 遊戲網址測試", badge: "上線測試", summary: "在新分頁開啟遊戲網址，實測登入與英雄榜連線", details: "在瀏覽器新分頁貼上剛剛複製的網址，成功開啟「天平守護者 等量公理大冒險」或您的單元應用程式，確認英雄榜正常載入，點選登入開始測驗。", tags: ["遊戲網址", "線上測試", "英雄榜連線"] },
+      { id: 32, slide: 32, category: "step6", title: "6. 部署 GAS(19) - 確定部署成功", badge: "後台驗收", summary: "查看 Google 試算表，自動建立「成績紀錄」分頁", details: "打開你的 Google 試算表，確認底部自動出現「成績紀錄」分頁！表頭自動包含：提交時間、班級、座號、暱稱、隨機代碼、總分、加法(20)、減法(20)...等，並已成功寫入測試資料。", tags: ["成績紀錄", "自動建立分頁", "試算表驗收", "部署成功確認"] },
+      { id: 33, slide: 33, category: "step6", title: "遊戲網址在哪裡？", badge: "日常管理", summary: "引導教師關閉視窗後如何重新找回遊戲網址", details: "很多老師在部署完關閉視窗後不知道如何再次查看或分享遊戲網址。講義特別提供兩步驟找回流程。", tags: ["找回網址", "忘記網址", "操作指引"] },
+      { id: 34, slide: 34, category: "step6", title: "6. 部署 GAS(20) - 從試算表進入部署", badge: "管理部署", summary: "試算表 -> 擴充功能 -> Apps Script -> 部署 -> 管理部署作業", details: "1. 從試算表上方選單點選「擴充功能」 -> 「Apps Script」。\n2. 點擊右上角「部署」按鈕旁邊的下拉箭頭。\n3. 點選「管理部署作業」。", tags: ["管理部署作業", "擴充功能", "進入選單"] },
+      { id: 35, slide: 35, category: "step6", title: "6. 部署 GAS(21) - 在管理部署找網址", badge: "複製網址", summary: "在管理部署視窗中複製網頁應用程式網址，上傳至 Padlet", details: "在彈出的「管理部署作業」視窗中，點擊網頁應用程式底下的「網址」旁的「複製」圖示。複製後回到 Padlet，將網址貼入「成果_部門」專欄完成研習檢核！", tags: ["管理部署", "複製網址", "Padlet 成果_部門", "研習結案"] },
+      { id: 36, slide: 36, category: "step6", title: "研習總結與 Q&A", badge: "結語問答", summary: "115 國中數學領域 數位科技推動自主學習探究 Q&A", details: "恭喜完成 AI × APP × GAS 全套工作流程！透過此套件，教師能以零成本、不寫一行艱深代碼的方式，為國中數學各單元量身打造專屬的互動自主學習與成效追蹤系統。", tags: ["總結", "Q&A", "李慧玲老師", "自主學習推動"] }
     ];
 
-    // 系統狀態
-    let activeTab = 'all';
+    // 全域變數
+    let currentMainView = 'padlet'; // 'padlet' | 'slides' | 'prompts' | 'demo'
+    let currentPadletCol = 'all';
+    let currentSlideCat = 'all';
     let currentSearchTerm = '';
-    let isUnlocked = false;
-
-    // 密碼相關驗證 (密碼: 049)
+    let padletLayout = 'kanban'; // 'kanban' | 'grid'
     const SECRET_KEY = "049";
 
+    // 密碼驗證
     function checkAuth() {
       const auth = sessionStorage.getItem("agy_auth_049");
       if (auth === "true") {
@@ -795,7 +545,6 @@
       if (e) e.preventDefault();
       const val = document.getElementById("pwdInput").value.trim();
       const errorMsg = document.getElementById("errorMsg");
-
       if (val === SECRET_KEY) {
         sessionStorage.setItem("agy_auth_049", "true");
         errorMsg.classList.add("hidden");
@@ -803,17 +552,18 @@
         showToast("認證成功！已解鎖研習知識庫");
       } else {
         errorMsg.classList.remove("hidden");
-        document.getElementById("pwdInput").classList.add("border-rose-500", "animate-shake");
+        document.getElementById("pwdInput").classList.add("border-rose-500");
         setTimeout(() => {
-          document.getElementById("pwdInput").classList.remove("border-rose-500", "animate-shake");
+          document.getElementById("pwdInput").classList.remove("border-rose-500");
         }, 500);
       }
     }
 
     function unlockUI() {
-      isUnlocked = true;
       document.getElementById("lockScreen").classList.add("hidden");
-      renderCards();
+      renderSubFilterBar();
+      renderPadletBoard();
+      renderSlides();
     }
 
     function lockSystem() {
@@ -826,12 +576,8 @@
 
     function appendPin(num) {
       const input = document.getElementById("pwdInput");
-      if (input.value.length < 6) {
-        input.value += num;
-      }
-      if (input.value.length === 3 && input.value === SECRET_KEY) {
-        handlePasswordSubmit();
-      }
+      if (input.value.length < 6) input.value += num;
+      if (input.value.length === 3 && input.value === SECRET_KEY) handlePasswordSubmit();
     }
 
     function clearPin() {
@@ -849,109 +595,294 @@
       input.type = input.type === "password" ? "text" : "password";
     }
 
-    // 分類 Tab 切換
-    function setActiveTab(tab) {
-      activeTab = tab;
-      
-      // 更新按鈕樣式
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-        btn.classList.add('bg-slate-100', 'text-slate-700');
+    // 主 View 切換
+    function switchMainView(view) {
+      currentMainView = view;
+      document.querySelectorAll('.main-view-btn').forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-slate-950', 'bg-blue-600', 'text-white', 'shadow');
+        btn.classList.add('bg-white/10', 'text-white');
       });
 
-      const activeBtn = document.getElementById(`tab-${tab}`);
+      const activeBtn = document.getElementById(`mainView-${view}`);
       if (activeBtn) {
-        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
-        activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('bg-white/10');
+        if (view === 'padlet') {
+          activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow');
+        } else {
+          activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
+        }
       }
 
-      // 控制展示區域
-      const cardsGrid = document.getElementById('cardsGrid');
-      const searchStats = document.getElementById('searchStats');
-      const demoSection = document.getElementById('demoSection');
-      const promptsSection = document.getElementById('promptsSection');
+      // 控制顯示
+      document.getElementById('viewPadlet').classList.toggle('hidden', view !== 'padlet');
+      document.getElementById('viewSlides').classList.toggle('hidden', view !== 'slides');
+      document.getElementById('viewPrompts').classList.toggle('hidden', view !== 'prompts');
+      document.getElementById('viewDemo').classList.toggle('hidden', view !== 'demo');
 
-      if (tab === 'demo') {
-        cardsGrid.classList.add('hidden');
-        searchStats.classList.add('hidden');
-        promptsSection.classList.add('hidden');
-        demoSection.classList.remove('hidden');
+      renderSubFilterBar();
+      updateSearchCounts();
+
+      if (view === 'demo') {
         initCanvas();
-      } else if (tab === 'prompts') {
-        cardsGrid.classList.add('hidden');
-        searchStats.classList.add('hidden');
-        demoSection.classList.add('hidden');
-        promptsSection.classList.remove('hidden');
-      } else {
-        cardsGrid.classList.remove('hidden');
-        searchStats.classList.remove('hidden');
-        demoSection.classList.add('hidden');
-        promptsSection.classList.add('hidden');
-        renderCards();
       }
     }
 
-    function filterByTab(tab) {
-      setActiveTab(tab);
-      window.scrollTo({ top: 350, behavior: 'smooth' });
-    }
+    // 渲染子篩選器
+    function renderSubFilterBar() {
+      const bar = document.getElementById('subFilterBar');
+      bar.innerHTML = '';
 
-    // 搜尋功能
-    function handleSearch() {
-      const term = document.getElementById("searchInput").value.trim().toLowerCase();
-      currentSearchTerm = term;
-      const clearBtn = document.getElementById("clearSearchBtn");
-      if (term) {
-        clearBtn.classList.remove("hidden");
+      if (currentMainView === 'padlet') {
+        const cols = [{ id: 'all', name: '全部專欄 (31)' }, ...PADLET_DATA.sections.map(s => ({ id: s.column, name: `${s.column} (${s.postCount})` }))];
+        cols.forEach(c => {
+          const btn = document.createElement('button');
+          const isAct = currentPadletCol === c.id;
+          btn.className = `px-3 py-1.5 rounded-xl whitespace-nowrap transition ${isAct ? 'bg-amber-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`;
+          btn.textContent = c.name;
+          btn.onclick = () => {
+            currentPadletCol = c.id;
+            renderSubFilterBar();
+            renderPadletBoard();
+          };
+          bar.appendChild(btn);
+        });
+      } else if (currentMainView === 'slides') {
+        const cats = [
+          { id: 'all', name: '全部投影片 (36)' },
+          { id: 'prep', name: '前置準備 (S1-5)' },
+          { id: 'step1', name: '1. 評量 APP 生成 (S6-7)' },
+          { id: 'step2', name: '2. 試算表設定 (S8-10)' },
+          { id: 'step3', name: '3. GAS 指令與架構 (S11-14)' },
+          { id: 'step4', name: '4. Apps Script 設定 (S15-23)' },
+          { id: 'step5', name: '5. 部署與進階授權 (S24-30)' },
+          { id: 'step6', name: '6. 成績驗收與維護 (S31-36)' }
+        ];
+        cats.forEach(c => {
+          const btn = document.createElement('button');
+          const isAct = currentSlideCat === c.id;
+          btn.className = `px-3 py-1.5 rounded-xl whitespace-nowrap transition ${isAct ? 'bg-blue-600 text-white font-bold shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}`;
+          btn.textContent = c.name;
+          btn.onclick = () => {
+            currentSlideCat = c.id;
+            renderSubFilterBar();
+            renderSlides();
+          };
+          bar.appendChild(btn);
+        });
       } else {
-        clearBtn.classList.add("hidden");
-      }
-      if (activeTab === 'demo' || activeTab === 'prompts') {
-        setActiveTab('all');
-      } else {
-        renderCards();
+        bar.innerHTML = '<span class="text-xs text-slate-400">目前視圖包含完整指令與互動功能</span>';
       }
     }
 
-    function clearSearch() {
-      document.getElementById("searchInput").value = "";
-      currentSearchTerm = "";
-      document.getElementById("clearSearchBtn").classList.add("hidden");
-      renderCards();
+    // 切換 Padlet 排版模式
+    function togglePadletLayout() {
+      padletLayout = padletLayout === 'kanban' ? 'grid' : 'kanban';
+      document.getElementById('layoutToggleBtn').textContent = padletLayout === 'kanban' ? '切換為網格檢視' : '切換為看板檢視';
+      document.getElementById('padletKanbanContainer').classList.toggle('hidden', padletLayout !== 'kanban');
+      document.getElementById('padletGridContainer').classList.toggle('hidden', padletLayout !== 'grid');
+      renderPadletBoard();
     }
 
-    // 渲染卡片
-    function renderCards() {
+    // 渲染 Padlet 內容 (包含看板與網格)
+    function renderPadletBoard() {
+      const kanbanContainer = document.getElementById('padletKanbanContainer');
+      const gridContainer = document.getElementById('padletGridContainer');
+      kanbanContainer.innerHTML = '';
+      gridContainer.innerHTML = '';
+
+      let totalVisible = 0;
+
+      PADLET_DATA.sections.forEach(section => {
+        if (currentPadletCol !== 'all' && currentPadletCol !== section.column) return;
+
+        // 篩選 Posts
+        const filteredPosts = section.posts.filter(p => {
+          if (!currentSearchTerm) return true;
+          const s = currentSearchTerm.toLowerCase();
+          const matchTitle = (p.title || '').toLowerCase().includes(s);
+          const matchContent = (p.content || '').toLowerCase().includes(s);
+          const matchAuthor = (p.author || '').toLowerCase().includes(s);
+          const matchCol = (section.column || '').toLowerCase().includes(s);
+          return matchTitle || matchContent || matchAuthor || matchCol;
+        });
+
+        totalVisible += filteredPosts.length;
+
+        // --- 看板欄位 (Kanban Column) ---
+        const colCard = document.createElement('div');
+        colCard.className = 'flex-shrink-0 w-80 sm:w-96 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col max-h-[85vh]';
+
+        // 欄位標題色彩
+        let headerColor = 'bg-slate-800 text-white';
+        if (section.column === '講義') headerColor = 'bg-gradient-to-r from-indigo-700 to-blue-700 text-white';
+        if (section.column === '互動式評量') headerColor = 'bg-gradient-to-r from-blue-700 to-cyan-700 text-white';
+        if (section.column === '部署') headerColor = 'bg-gradient-to-r from-amber-600 to-orange-600 text-white';
+        if (section.column === '成果_互動式評量') headerColor = 'bg-gradient-to-r from-emerald-700 to-teal-700 text-white';
+        if (section.column === '成果_部署') headerColor = 'bg-gradient-to-r from-purple-700 to-indigo-700 text-white';
+
+        colCard.innerHTML = `
+          <div class="p-4 rounded-t-2xl ${headerColor} flex items-center justify-between shadow-sm">
+            <h4 class="font-bold text-sm sm:text-base flex items-center gap-2">
+              <span>${section.column}</span>
+            </h4>
+            <span class="px-2 py-0.5 bg-white/20 text-xs rounded-full font-bold">
+              ${filteredPosts.length}
+            </span>
+          </div>
+          <div class="p-3 overflow-y-auto space-y-4 kanban-col flex-1 bg-slate-50">
+            <!-- Posts -->
+          </div>
+        `;
+
+        const postsContainer = colCard.querySelector('.kanban-col');
+
+        if (filteredPosts.length === 0) {
+          postsContainer.innerHTML = '<div class="text-center py-8 text-xs text-slate-400">本欄無相符項目</div>';
+        } else {
+          filteredPosts.forEach(post => {
+            const cardEl = createPadletPostCard(post, section.column);
+            postsContainer.appendChild(cardEl);
+
+            // 網格視圖卡片
+            const gridCard = createPadletPostCard(post, section.column, true);
+            gridContainer.appendChild(gridCard);
+          });
+        }
+
+        kanbanContainer.appendChild(colCard);
+      });
+
+      if (currentMainView === 'padlet') {
+        document.getElementById('itemCount').textContent = totalVisible;
+      }
+    }
+
+    // 建立 Padlet 單張卡片元件
+    function createPadletPostCard(post, colName, isGrid = false) {
+      const card = document.createElement('div');
+      card.className = `bg-white rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition p-3.5 flex flex-col justify-between group ${isGrid ? 'shadow-sm' : ''}`;
+
+      // 圖片區 (使用本機已下載的 assets/padlet/ 路徑)
+      let imageHtml = '';
+      if (post.images && post.images.length > 0) {
+        const cardImg = post.images.find(img => img.type === 'card_image' || img.type === 'photo_attachment' || img.type === 'pdf_thumbnail');
+        if (cardImg && cardImg.local_path) {
+          imageHtml = `
+            <div class="relative mb-3 rounded-lg overflow-hidden border border-slate-100 bg-slate-100 cursor-zoom-in" onclick="openLightbox('${cardImg.local_path}', '${(post.title || colName).replace(/'/g, "\\'")}')">
+              <img src="${cardImg.local_path}" alt="${post.title || 'Padlet截圖'}" class="w-full max-h-48 object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+              <div class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/60 text-white rounded text-[10px] flex items-center gap-1">
+                🔍 點擊看大圖
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // 連結按鈕
+      let linksHtml = '';
+      if (post.links && post.links.length > 0) {
+        linksHtml = '<div class="flex flex-wrap gap-1.5 mt-3 pt-2.5 border-t border-slate-100">';
+        post.links.forEach(link => {
+          let label = '開啟連結';
+          let btnClass = 'bg-slate-100 hover:bg-slate-200 text-slate-700';
+
+          if (link.type === 'gas_app' || (link.url && link.url.includes('script.google.com'))) {
+            label = '🚀 開啟 GAS 評量 APP';
+            btnClass = 'bg-purple-600 hover:bg-purple-700 text-white font-bold';
+          } else if (link.type === 'gemini_share' || link.type === 'gemini_share_short' || (link.url && link.url.includes('gemini.google'))) {
+            label = '🤖 體驗 Gemini Canvas APP';
+            btnClass = 'bg-blue-600 hover:bg-blue-700 text-white font-bold';
+          } else if (link.type === 'google_doc_codegs' || link.label === '📁 Code.gs') {
+            label = '📁 開啟 Code.gs 文件';
+            btnClass = 'bg-amber-600 hover:bg-amber-700 text-white font-medium';
+          } else if (link.type === 'google_doc_indexhtml' || link.label === '🧑💻 Index.html') {
+            label = '🧑💻 開啟 Index.html 文件';
+            btnClass = 'bg-emerald-600 hover:bg-emerald-700 text-white font-medium';
+          } else if (link.type === 'pdf_attachment' || link.label?.includes('PDF')) {
+            label = '📄 開啟 PDF 附件';
+            btnClass = 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200';
+          }
+
+          linksHtml += `
+            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs rounded-lg ${btnClass} transition flex items-center gap-1 shadow-sm">
+              <span>${label}</span>
+              <span class="text-[10px]">↗</span>
+            </a>
+          `;
+        });
+        linksHtml += '</div>';
+      }
+
+      // 提示詞複製專區
+      let copyBtn = '';
+      if (post.content && post.content.length > 80 && (post.content.includes('你是一個') || post.content.includes('我要部署到'))) {
+        copyBtn = `
+          <button onclick="copyRawText('${post.index}')" class="mt-2 text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
+            📋 複製完整提示詞指令
+          </button>
+          <div id="rawPostContent-${post.index}" class="hidden">${post.content}</div>
+        `;
+      }
+
+      card.innerHTML = `
+        <div>
+          <!-- Header: 欄位標籤與發布者 -->
+          <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+            <span class="font-medium text-slate-700 flex items-center gap-1">
+              👤 ${post.author || '研習教師'}
+            </span>
+            <span class="text-[11px] text-slate-400">${post.date || ''}</span>
+          </div>
+
+          <!-- 標題 -->
+          <h5 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition mb-2">
+            ${highlightText(post.title || colName, currentSearchTerm)}
+          </h5>
+
+          <!-- 圖片 -->
+          ${imageHtml}
+
+          <!-- 內文文字 -->
+          <p class="text-xs text-slate-600 whitespace-pre-line leading-relaxed max-h-36 overflow-y-auto">
+            ${highlightText(post.content || '', currentSearchTerm)}
+          </p>
+
+          ${copyBtn}
+        </div>
+
+        ${linksHtml}
+      `;
+
+      return card;
+    }
+
+    // 渲染投影片教材卡片
+    function renderSlides() {
       const container = document.getElementById("cardsGrid");
       container.innerHTML = "";
 
       let filtered = SLIDES_DATA.filter(item => {
-        // Tab 篩選
-        if (activeTab !== 'all' && item.category !== activeTab) {
-          return false;
-        }
-        // 搜尋篩選
+        if (currentSlideCat !== 'all' && item.category !== currentSlideCat) return false;
         if (currentSearchTerm) {
-          const matchTitle = item.title.toLowerCase().includes(currentSearchTerm);
-          const matchSummary = item.summary.toLowerCase().includes(currentSearchTerm);
-          const matchDetails = item.details.toLowerCase().includes(currentSearchTerm);
-          const matchTags = item.tags.some(t => t.toLowerCase().includes(currentSearchTerm));
-          const matchSlide = `slide ${item.slide}`.includes(currentSearchTerm) || `${item.slide}` === currentSearchTerm;
+          const s = currentSearchTerm.toLowerCase();
+          const matchTitle = item.title.toLowerCase().includes(s);
+          const matchSummary = item.summary.toLowerCase().includes(s);
+          const matchDetails = item.details.toLowerCase().includes(s);
+          const matchTags = item.tags.some(t => t.toLowerCase().includes(s));
+          const matchSlide = `slide ${item.slide}`.includes(s) || `${item.slide}` === s;
           return matchTitle || matchSummary || matchDetails || matchTags || matchSlide;
         }
         return true;
       });
 
-      document.getElementById("itemCount").textContent = filtered.length;
+      if (currentMainView === 'slides') {
+        document.getElementById("itemCount").textContent = filtered.length;
+      }
 
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="col-span-full py-16 text-center text-slate-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p class="text-base font-medium">找不到相符的投影片或教學步驟</p>
-            <p class="text-xs text-slate-400 mt-1">請嘗試不同關鍵字，例如「Sheet ID」、「Canvas」或「Index」</p>
+            <p class="text-base font-medium">找不到相符的投影片步驟</p>
           </div>
         `;
         return;
@@ -969,7 +900,7 @@
         ` : '';
 
         const promptBtn = item.isPrompt ? `
-          <button onclick="filterByTab('prompts')" class="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center mt-2">
+          <button onclick="switchMainView('prompts')" class="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center mt-2">
             📋 查看/複製本步驟完整提示詞 →
           </button>
         ` : '';
@@ -1014,20 +945,86 @@
       });
     }
 
+    // 搜尋處理
+    function handleSearch() {
+      const term = document.getElementById("searchInput").value.trim().toLowerCase();
+      currentSearchTerm = term;
+      const clearBtn = document.getElementById("clearSearchBtn");
+      clearBtn.classList.toggle("hidden", !term);
+
+      renderPadletBoard();
+      renderSlides();
+      updateSearchCounts();
+    }
+
+    function clearSearch() {
+      document.getElementById("searchInput").value = "";
+      currentSearchTerm = "";
+      document.getElementById("clearSearchBtn").classList.add("hidden");
+      renderPadletBoard();
+      renderSlides();
+      updateSearchCounts();
+    }
+
+    function updateSearchCounts() {
+      if (currentMainView === 'padlet') {
+        let count = 0;
+        PADLET_DATA.sections.forEach(s => {
+          if (currentPadletCol !== 'all' && currentPadletCol !== s.column) return;
+          s.posts.forEach(p => {
+            if (!currentSearchTerm) { count++; return; }
+            const sTerm = currentSearchTerm.toLowerCase();
+            if ((p.title||'').toLowerCase().includes(sTerm) || (p.content||'').toLowerCase().includes(sTerm) || (p.author||'').toLowerCase().includes(sTerm)) {
+              count++;
+            }
+          });
+        });
+        document.getElementById('itemCount').textContent = count;
+      }
+    }
+
     function highlightText(text, keyword) {
       if (!keyword || !text) return text;
       const regex = new RegExp(`(${keyword})`, 'gi');
       return text.replace(regex, '<span class="bg-amber-200 text-amber-900 px-0.5 rounded font-medium">$1</span>');
     }
 
+    // 圖片 Lightbox
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      document.getElementById('imageLightbox').classList.remove('hidden');
+      document.getElementById('imageLightbox').classList.add('flex');
+    }
+
+    function closeLightbox(e) {
+      if (e.target.id === 'imageLightbox') {
+        closeLightboxDirect();
+      }
+    }
+
+    function closeLightboxDirect() {
+      document.getElementById('imageLightbox').classList.add('hidden');
+      document.getElementById('imageLightbox').classList.remove('flex');
+    }
+
     // 複製工具
     function copyToClipboard(elementId) {
       const text = document.getElementById(elementId).innerText;
       navigator.clipboard.writeText(text).then(() => {
-        showToast("已成功複製完整指令到剪貼簿！");
+        showToast("已複製到剪貼簿！");
       }).catch(err => {
-        showToast("複製失敗，請手動選取複製");
+        showToast("複製失敗，請手動選取");
       });
+    }
+
+    function copyRawText(index) {
+      const el = document.getElementById(`rawPostContent-${index}`);
+      if (el) {
+        navigator.clipboard.writeText(el.innerText).then(() => {
+          showToast("已成功複製完整提示詞！");
+        });
+      }
     }
 
     function showToast(msg) {
@@ -1040,26 +1037,11 @@
       }, 3000);
     }
 
-    // ==================== 互動試玩測驗邏輯 (Demo Quiz) ====================
+    // ==================== 互動試玩測驗 DEMO ====================
     const DEMO_QUESTIONS = [
-      {
-        stage: "基礎關 (1/3)",
-        formula: "2x + 6 = 18",
-        answer: 6,
-        options: [4, 6, 8, 12]
-      },
-      {
-        stage: "進階關 (2/3)",
-        formula: "5x - 7 = 3x + 9",
-        answer: 8,
-        options: [6, 8, 10, 16]
-      },
-      {
-        stage: "挑戰關 (3/3)",
-        formula: "\\frac{x + 2}{3} = 4",
-        answer: 10,
-        options: [6, 8, 10, 14]
-      }
+      { stage: "基礎關 (1/3)", formula: "2x + 6 = 18", answer: 6, options: [4, 6, 8, 12] },
+      { stage: "進階關 (2/3)", formula: "5x - 7 = 3x + 9", answer: 8, options: [6, 8, 10, 16] },
+      { stage: "挑戰關 (3/3)", formula: "\\frac{x + 2}{3} = 4", answer: 10, options: [6, 8, 10, 14] }
     ];
 
     let currentQIndex = 0;
@@ -1067,10 +1049,7 @@
 
     function startDemoQuiz() {
       const name = document.getElementById("demoName").value.trim();
-      if (!name) {
-        alert("請輸入學生姓名！");
-        return;
-      }
+      if (!name) { alert("請輸入學生姓名！"); return; }
       document.getElementById("demoLoginArea").classList.add("hidden");
       document.getElementById("demoQuizArea").classList.remove("hidden");
       currentQIndex = 0;
@@ -1088,10 +1067,7 @@
       formulaContainer.innerHTML = `$$${q.formula}$$`;
       if (window.renderMathInElement) {
         renderMathInElement(formulaContainer, {
-          delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
-          ]
+          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]
         });
       }
 
@@ -1111,17 +1087,15 @@
       const q = DEMO_QUESTIONS[currentQIndex];
       if (selected === q.answer) {
         demoScore += 33;
-        if (currentQIndex === DEMO_QUESTIONS.length - 1) demoScore = 100; // 合計滿分 100
+        if (currentQIndex === DEMO_QUESTIONS.length - 1) demoScore = 100;
         showToast("答對了！加分！");
       } else {
         showToast("差一點點，繼續加油！");
       }
-
       currentQIndex++;
       if (currentQIndex < DEMO_QUESTIONS.length) {
         renderDemoQuestion();
       } else {
-        // 完成
         document.getElementById("demoQuizArea").classList.add("hidden");
         document.getElementById("demoResultArea").classList.remove("hidden");
         document.getElementById("demoFinalScore").textContent = `${demoScore} 分`;
@@ -1134,7 +1108,7 @@
       document.getElementById("demoLoginArea").classList.remove("hidden");
     }
 
-    // 手寫計算紙 Canvas 畫布功能
+    // 計算紙畫布
     let canvas, ctx;
     let isDrawing = false;
 
@@ -1144,9 +1118,8 @@
       ctx = canvas.getContext("2d");
       ctx.lineWidth = 3;
       ctx.lineCap = "round";
-      ctx.strokeStyle = "#1d4ed8"; // Blue-700
+      ctx.strokeStyle = "#1d4ed8";
 
-      // 支援滑鼠與觸控
       canvas.addEventListener("mousedown", startDrawing);
       canvas.addEventListener("mousemove", draw);
       canvas.addEventListener("mouseup", stopDrawing);
@@ -1192,7 +1165,7 @@
       }
     }
 
-    // 初始化認證檢查與渲染
+    // 初始化
     window.addEventListener("DOMContentLoaded", () => {
       checkAuth();
       if (window.renderMathInElement) {
