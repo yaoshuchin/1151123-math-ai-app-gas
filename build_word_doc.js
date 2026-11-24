@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const recordsData = JSON.parse(fs.readFileSync(path.join(__dirname, 'assets', 'records_data.json'), 'utf-8'));
 const {
   Document,
   Packer,
@@ -270,6 +271,79 @@ function createDoc() {
             shading: { fill: bgColor, type: ShadingType.CLEAR },
             margins: { top: 80, bottom: 80, left: 100, right: 100 },
             children: [p(item.desc, { size: 18 })]
+          })
+        ]
+      }));
+    });
+
+    return new Table({
+      width: { size: 100, type: WidthType.PERCENTAGE },
+      rows: rows
+    });
+  }
+
+  function createRecordsTable(photos) {
+    const rows = [
+      new TableRow({
+        tableHeader: true,
+        children: [
+          new TableCell({
+            width: { size: 12, type: WidthType.PERCENTAGE },
+            shading: { fill: "BE123C", type: ShadingType.CLEAR },
+            margins: { top: 100, bottom: 100, left: 80, right: 80 },
+            children: [p("照片編號", { bold: true, color: "FFFFFF", size: 18, alignment: AlignmentType.CENTER })]
+          }),
+          new TableCell({
+            width: { size: 16, type: WidthType.PERCENTAGE },
+            shading: { fill: "BE123C", type: ShadingType.CLEAR },
+            margins: { top: 100, bottom: 100, left: 80, right: 80 },
+            children: [p("時間 / 分類", { bold: true, color: "FFFFFF", size: 18, alignment: AlignmentType.CENTER })]
+          }),
+          new TableCell({
+            width: { size: 28, type: WidthType.PERCENTAGE },
+            shading: { fill: "BE123C", type: ShadingType.CLEAR },
+            margins: { top: 100, bottom: 100, left: 80, right: 80 },
+            children: [p("活動主題與情境", { bold: true, color: "FFFFFF", size: 18 })]
+          }),
+          new TableCell({
+            width: { size: 44, type: WidthType.PERCENTAGE },
+            shading: { fill: "BE123C", type: ShadingType.CLEAR },
+            margins: { top: 100, bottom: 100, left: 80, right: 80 },
+            children: [p("現場紀實說明與教學意涵", { bold: true, color: "FFFFFF", size: 18 })]
+          })
+        ]
+      })
+    ];
+
+    photos.forEach((item, index) => {
+      const bgColor = index % 2 === 0 ? "FFFFFF" : "FFF1F2";
+      rows.push(new TableRow({
+        children: [
+          new TableCell({
+            shading: { fill: bgColor, type: ShadingType.CLEAR },
+            margins: { top: 80, bottom: 80, left: 80, right: 80 },
+            children: [p(item.id.replace('photo_', '照片 '), { bold: true, size: 18, alignment: AlignmentType.CENTER })]
+          }),
+          new TableCell({
+            shading: { fill: bgColor, type: ShadingType.CLEAR },
+            margins: { top: 80, bottom: 80, left: 80, right: 80 },
+            children: [
+              p(item.time, { bold: true, size: 17, alignment: AlignmentType.CENTER, color: "BE123C" }),
+              p(`[${item.category}]`, { size: 15, alignment: AlignmentType.CENTER, color: "64748B" })
+            ]
+          }),
+          new TableCell({
+            shading: { fill: bgColor, type: ShadingType.CLEAR },
+            margins: { top: 80, bottom: 80, left: 80, right: 80 },
+            children: [
+              p(item.title, { bold: true, size: 18, color: "1E293B" }),
+              p(`主講/標記: ${item.speaker}`, { size: 15, color: "64748B" })
+            ]
+          }),
+          new TableCell({
+            shading: { fill: bgColor, type: ShadingType.CLEAR },
+            margins: { top: 80, bottom: 80, left: 80, right: 80 },
+            children: [p(item.description, { size: 17, color: "334155" })]
           })
         ]
       }));
@@ -659,6 +733,29 @@ Google Sheet ID = 1SeihVjLWtEZF4KrbtBukPqiyo4Km_0-kdcj21ee1Ex8`),
             { slide: "成果 10", title: "宏仁國中 ｜ 林偉業老師", desc: "單元：國中數學自主學習評量（Gemini Canvas 成果）" },
             { slide: "成果 11", title: "魚池國中 ｜ 研習教師", desc: "單元：國中數學自主學習評量（Gemini Canvas 成果）" }
           ]),
+
+          p(""),
+          h1("第十章：南投國中現場研習教學紀實與實錄影音（24張照片與9分23秒示範影片全解析）"),
+          calloutBox("📸 現場研習實況與影音專區", [
+            "研習地點：南投縣立南投國中圖書館 (Dream House 自主學習空間)",
+            "主講教師：教育部中央輔導團 ｜ 桃園市中興國中 李慧玲老師",
+            "本章節完整記錄研習現場動態，包含李慧玲老師 9 分 23 秒之 AI Canvas 提示詞生成評量 APP 示範影片，以及 24 張活動紀實照片與教學專業說明。",
+            "所有影音與照片皆已完成網頁高畫質壓縮優化，收錄於線上知識庫系統（https://yaoshuchin.github.io/1151123-math-ai-app-gas/）。"
+          ]),
+
+          h2("10.1 現場示範錄影影音全紀錄（時長 09:23）"),
+          multiP([
+            { text: "• 影片主題：", bold: true },
+            { text: "李慧玲老師 現場投影示範：AI 提示詞全自動生成評量 APP 實況\n" },
+            { text: "• 影片時長與規格：", bold: true },
+            { text: "9 分 23 秒 ｜ 540p Web-Optimized H.264 (AAC 雙聲道音訊)\n" },
+            { text: "• 影片重點內容：", bold: true },
+            { text: "李慧玲老師在大螢幕前現場輸入精確結構化 Prompt，示範 Google Gemini Canvas 瞬時生成具備三關卡（基礎、進階、挑戰）、即時 KaTeX 數學公式排版、手寫計算紙塗鴉板與自動計分之全功能 Web APP，並現場向所有學員展示互動評量的靈活教學應用。" }
+          ]),
+
+          h2("10.2 研習現場 24 張照片紀實與教學意涵解析"),
+          p("研習活動依照時間序推展，涵蓋開場引導、故事化教材、實體摺紙探究、師生即時對戰與課後共備討論："),
+          createRecordsTable(recordsData.photos),
 
           p(""),
           new Paragraph({

@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const padletData = JSON.parse(fs.readFileSync(path.join(__dirname, 'assets', 'padlet_data.json'), 'utf-8'));
+const recordsData = JSON.parse(fs.readFileSync(path.join(__dirname, 'assets', 'records_data.json'), 'utf-8'));
 
-// Generate the updated index.html
 const htmlContent = `<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -52,7 +52,6 @@ const htmlContent = `<!DOCTYPE html>
       from { transform: translateY(100%); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-    /* Kanban column custom scrollbar */
     .kanban-col::-webkit-scrollbar {
       width: 6px;
     }
@@ -63,9 +62,6 @@ const htmlContent = `<!DOCTYPE html>
     .kanban-col::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 4px;
-    }
-    .kanban-col::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
     }
     .kanban-board-scroll::-webkit-scrollbar {
       height: 8px;
@@ -96,7 +92,7 @@ const htmlContent = `<!DOCTYPE html>
       </div>
 
       <h2 class="text-2xl font-bold text-slate-900 mb-2">研習知識庫存取認證</h2>
-      <p class="text-slate-500 text-sm mb-6">115 國中數學領域 數位科技推動自主學習探究<br><span class="text-blue-600 font-medium">AI × APP × GAS</span> 教學手冊系統</p>
+      <p class="text-slate-500 text-sm mb-6">115 國中數學領域 數位科技推動自主學習探究<br><span class="text-blue-600 font-medium">AI × APP × GAS</span> 互動教學知識系統</p>
 
       <form id="passwordForm" onsubmit="handlePasswordSubmit(event)">
         <div class="mb-4">
@@ -150,7 +146,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <div>
           <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">115 國中數學領域 數位科技推動自主學習探究</h1>
-          <p class="text-xs text-slate-500 hidden sm:block">AI × APP × GAS 互動評量、雲端串接與 Padlet 協作專區 ｜ 李慧玲老師主講</p>
+          <p class="text-xs text-slate-500 hidden sm:block">AI × APP × GAS 互動評量、雲端串接、Padlet 成果與教學實錄 ｜ 李慧玲老師主講</p>
         </div>
       </div>
       <div class="flex items-center space-x-2 sm:space-x-3">
@@ -179,22 +175,25 @@ const htmlContent = `<!DOCTYPE html>
       <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
       <div class="relative z-10 max-w-4xl">
         <div class="inline-flex flex-wrap items-center gap-2 bg-blue-500/20 border border-blue-400/30 px-3 py-1 rounded-full text-xs font-semibold text-blue-200 mb-4">
-          <span>桃園市中興國中 李慧玲老師</span>
+          <span>中央輔導團 ｜ 桃園市中興國中 李慧玲老師</span>
           <span>•</span>
-          <span>36 頁完整實作手冊</span>
+          <span class="text-rose-300 font-bold">📸 教學紀錄 (24張照片+精華影片)</span>
           <span>•</span>
-          <span class="text-amber-300">Padlet 5 大專欄・31 項研習成果收錄</span>
+          <span class="text-amber-300">📌 Padlet 31 項成果</span>
         </div>
         <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
           國中數學 AI × APP × GAS 自主學習探究知識庫
         </h2>
         <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-          從 Gemini Canvas 生成三關卡數學評量，到 Google Apps Script (GAS) 自動連結 Google 試算表，建立零成本即時英雄榜！並完整收錄 <strong>Padlet 研習協作板</strong>之所有講義、部署指南、程式碼連結與各校教師（建國、福豐、經國、慈文、中興、青溪、會稽等）之優秀互動作品！
+          從 Gemini Canvas 生成三關卡數學評量，到 Google Apps Script (GAS) 自動連結 Google 試算表，建立零成本即時英雄榜！並完整收錄 <strong>Padlet 研習協作板成果</strong>與<strong>南投國中現場教學紀錄（精華實錄影片與 24 張活動紀實照片）</strong>！
         </p>
 
         <!-- 主導覽視圖切換器 -->
         <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
-          <button onclick="switchMainView('padlet')" id="mainView-padlet" class="main-view-btn px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow transition flex items-center gap-1.5">
+          <button onclick="switchMainView('records')" id="mainView-records" class="main-view-btn px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow transition flex items-center gap-1.5">
+            📸 教學紀錄 (活動紀實與影片)
+          </button>
+          <button onclick="switchMainView('padlet')" id="mainView-padlet" class="main-view-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl backdrop-blur-sm border border-white/15 transition flex items-center gap-1.5">
             📌 Padlet 研習協作板 (31 項成果)
           </button>
           <button onclick="switchMainView('slides')" id="mainView-slides" class="main-view-btn px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl backdrop-blur-sm border border-white/15 transition flex items-center gap-1.5">
@@ -220,7 +219,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <input type="text" id="searchInput" oninput="handleSearch()"
                class="w-full pl-10 pr-24 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:bg-white transition"
-               placeholder="輸入關鍵字跨庫查詢 (例如：福豐, 畢氏定理, 二次函數, Sheet ID, Code.gs, 李慧玲, 049)...">
+               placeholder="輸入關鍵字跨庫查詢 (例如：摺紙, 影片, 魔毯工廠, 畢氏定理, 二次函數, 福豐, 李慧玲, 049)...">
         <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 px-2.5 py-1 text-xs text-slate-400 hover:text-slate-600 bg-slate-200 hover:bg-slate-300 rounded-lg transition">
           清除
         </button>
@@ -234,13 +233,90 @@ const htmlContent = `<!DOCTYPE html>
 
     <!-- 搜尋統計 -->
     <div id="searchStats" class="text-xs text-slate-500 mb-4 px-1 flex items-center justify-between">
-      <span>正在顯示：<strong id="itemCount" class="text-blue-600 font-bold">31</strong> 個項目</span>
-      <span class="text-slate-400">點擊卡片縮圖可檢視大圖 ｜ 點擊連結可直接試玩互動評量</span>
+      <span>正在顯示：<strong id="itemCount" class="text-blue-600 font-bold">25</strong> 個項目</span>
+      <span class="text-slate-400">點擊照片縮圖可放大預覽 ｜ 影片支援直接在線觀看與全螢幕播放</span>
     </div>
 
+    <!-- ==================== VIEW 0: 教學紀錄 (新分頁) ==================== -->
+    <section id="viewRecords" class="block">
+      <!-- 頂部資訊 Banner -->
+      <div class="bg-gradient-to-r from-rose-50 to-orange-50 border border-rose-200 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rose-500 to-orange-500 text-white flex items-center justify-center font-bold text-2xl shadow-sm">
+            📸
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900">研習現場教學紀錄與精華實錄</h3>
+            <p class="text-xs text-slate-600 mt-0.5">
+              地點：<span class="font-medium text-rose-800">南投縣立南投國中圖書館 (Dream House)</span> ｜ 主講：<span class="font-medium text-rose-800">李慧玲老師</span>
+              ｜ 收錄 <span class="font-bold text-slate-800">1 部現場實錄影片</span> 與 <span class="font-bold text-slate-800">24 張活動紀實照片</span>
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 text-xs">
+          <span class="px-3 py-1.5 bg-rose-100 text-rose-800 rounded-lg font-semibold border border-rose-200">
+            全部已壓縮優化為網頁高速格式
+          </span>
+        </div>
+      </div>
+
+      <!-- 精華錄影專區 (Video Highlight) -->
+      <div id="videoHighlightArea" class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-slate-200 mb-8">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-1 bg-rose-600 text-white text-xs font-bold rounded-lg shadow-sm">🎬 現場實況錄影</span>
+            <span class="text-xs font-semibold text-slate-500">時長：09:23 ｜ 720p Web-Optimized H.264</span>
+          </div>
+          <span class="text-xs text-slate-400">2026/11/23 14:59 錄製</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-8 bg-black rounded-2xl overflow-hidden shadow-md">
+            <video id="teachingVideoPlayer" controls preload="metadata" poster="assets/records/video/video_poster.jpg" class="w-full max-h-[460px] aspect-video object-contain bg-black">
+              <source src="assets/records/video/teaching_demo_video.mp4" type="video/mp4">
+              您的瀏覽器不支援 HTML5 影片播放。
+            </video>
+          </div>
+          <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-4">
+            <div>
+              <h4 class="text-lg font-bold text-slate-900 mb-2 leading-snug">
+                李慧玲老師 現場投影示範：AI 提示詞全自動生成評量 APP 實況
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                本段 9 分 23 秒實況影片記錄李慧玲老師在南投國中現場，親自在大螢幕上示範輸入專業國中數學提示詞（Prompt），由 AI 即時自動編寫並輸出包含 3 個關卡、10 道題目、手寫計算紙畫布、KaTeX 公式渲染與即時回饋之全套互動評量網頁！
+              </p>
+              <div class="space-y-1.5 text-xs text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-rose-500 font-bold">✔</span>
+                  <span>展示 Canvas 即時渲染代碼</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-rose-500 font-bold">✔</span>
+                  <span>解一元一次方程式 3 關卡動態題目</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-rose-500 font-bold">✔</span>
+                  <span>整合手寫計算紙與觸控支援</span>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2">
+              <button onclick="playTeachingVideo()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-1.5">
+                <span>▶ 播放現場實況影片</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 24 張照片網格展示區 -->
+      <div id="photosGridContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <!-- 24 張照片卡片由 JS 動態渲染 -->
+      </div>
+    </section>
+
     <!-- ==================== VIEW 1: PADLET 研習協作板 ==================== -->
-    <section id="viewPadlet" class="block">
-      <!-- Padlet 原始資訊 Banner -->
+    <section id="viewPadlet" class="hidden">
       <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-lg shadow-sm">
@@ -326,7 +402,6 @@ const htmlContent = `<!DOCTYPE html>
 請處理非 GAS 環境中 google is not defined 的問題，加入了能讓網頁在本地預覽時提供模擬測試資料，並在部署到 GAS 後順暢連線到後端。同時將表單重置功能抽離為獨立函式 resetFormAfterSubmit 增加可讀性。</pre>
       </div>
 
-      <!-- 雲端文件參考連結卡片 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <a href="https://docs.google.com/document/d/1wlVrxXdCPUlA8hqOVpYLicjeQSnvnzTpz80vfG2ZXas/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="p-5 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-md transition flex items-center justify-between group">
           <div class="flex items-center space-x-3">
@@ -364,7 +439,6 @@ const htmlContent = `<!DOCTYPE html>
           <button onclick="resetDemoQuiz()" class="text-xs text-blue-600 hover:text-blue-800 font-medium">重新開始</button>
         </div>
 
-        <!-- 學生登入區 -->
         <div id="demoLoginArea" class="space-y-4">
           <div class="grid grid-cols-3 gap-3">
             <div>
@@ -385,7 +459,6 @@ const htmlContent = `<!DOCTYPE html>
           </button>
         </div>
 
-        <!-- 測驗進行區 -->
         <div id="demoQuizArea" class="hidden space-y-6">
           <div class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
             <div>關卡：<span id="demoStageName" class="font-bold text-blue-600">基礎關</span></div>
@@ -393,18 +466,14 @@ const htmlContent = `<!DOCTYPE html>
             <div>目前得分：<span id="demoCurrentScore" class="font-bold text-emerald-600">0 分</span></div>
           </div>
 
-          <!-- 題目卡片 -->
           <div class="p-6 bg-blue-50/50 rounded-2xl border border-blue-100 text-center">
             <p class="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">請解出未知數 x</p>
             <div id="demoQuestionFormula" class="text-2xl sm:text-3xl font-serif font-bold text-slate-900 my-4">
               <!-- KaTeX 渲染區 -->
             </div>
-            <div class="grid grid-cols-2 gap-3 mt-6" id="demoOptionsContainer">
-              <!-- 選項按鈕由 JS 填充 -->
-            </div>
+            <div class="grid grid-cols-2 gap-3 mt-6" id="demoOptionsContainer"></div>
           </div>
 
-          <!-- 手寫計算紙切換與畫布 -->
           <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-slate-700 flex items-center">
@@ -420,7 +489,6 @@ const htmlContent = `<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 測驗完成結果區 -->
         <div id="demoResultArea" class="hidden text-center py-6">
           <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -431,7 +499,6 @@ const htmlContent = `<!DOCTYPE html>
           <p class="text-sm text-slate-500 mb-6">成績已自動模擬寫入 Google 試算表</p>
           <div class="text-4xl font-extrabold text-blue-600 mb-6" id="demoFinalScore">100 分</div>
 
-          <!-- 英雄榜模擬 -->
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left mb-6">
             <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">🏆 即時英雄榜（隨機去識別化代碼）</h5>
             <div class="space-y-2 text-xs">
@@ -463,8 +530,11 @@ const htmlContent = `<!DOCTYPE html>
   <div id="imageLightbox" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4" onclick="closeLightbox(event)">
     <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center">
       <button onclick="closeLightboxDirect()" class="absolute -top-12 right-0 text-white hover:text-slate-300 text-3xl font-bold p-2">✕</button>
-      <img id="lightboxImg" src="" alt="圖片大圖" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl bg-slate-900 border border-slate-700">
-      <p id="lightboxCaption" class="text-white text-sm mt-3 font-medium text-center"></p>
+      <img id="lightboxImg" src="" alt="圖片大圖" class="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl bg-slate-900 border border-slate-700">
+      <div id="lightboxCaptionBox" class="text-center mt-3 max-w-2xl px-4">
+        <h5 id="lightboxTitle" class="text-white text-base font-bold"></h5>
+        <p id="lightboxCaption" class="text-slate-300 text-xs mt-1 leading-relaxed"></p>
+      </div>
     </div>
   </div>
 
@@ -479,12 +549,15 @@ const htmlContent = `<!DOCTYPE html>
     <div class="max-w-7xl mx-auto px-4">
       <p>115 國中數學領域 數位科技推動自主學習探究 — AI × APP × GAS</p>
       <p class="mt-1 text-slate-400">中央課程與教學輔導諮詢教師 ｜ 桃園市數學輔導團中興國中 李慧玲老師 主講 ｜ 系統門禁密碼：049</p>
-      <p class="mt-1 text-slate-400">Padlet 原網址：<a href="https://reurl.cc/NOKz9k" target="_blank" class="text-blue-500 hover:underline">reurl.cc/NOKz9k</a></p>
+      <p class="mt-1 text-slate-400">研習地點：南投縣立南投國中圖書館 (Dream House) ｜ Padlet 原網址：<a href="https://reurl.cc/NOKz9k" target="_blank" class="text-blue-500 hover:underline">reurl.cc/NOKz9k</a></p>
     </div>
   </footer>
 
   <!-- ==================== 核心資料與腳本 ==================== -->
   <script>
+    // 內嵌教學紀錄資料 (24 張照片 + 1 部影片)
+    const RECORDS_DATA = ${JSON.stringify(recordsData)};
+
     // 內嵌 Padlet 完整 31 項目與本地圖片路徑
     const PADLET_DATA = ${JSON.stringify(padletData)};
 
@@ -528,15 +601,16 @@ const htmlContent = `<!DOCTYPE html>
       { id: 36, slide: 36, category: "step6", title: "研習總結與 Q&A", badge: "結語問答", summary: "115 國中數學領域 數位科技推動自主學習探究 Q&A", details: "恭喜完成 AI × APP × GAS 全套工作流程！透過此套件，教師能以零成本、不寫一行艱深代碼的方式，為國中數學各單元量身打造專屬的互動自主學習與成效追蹤系統。", tags: ["總結", "Q&A", "李慧玲老師", "自主學習推動"] }
     ];
 
-    // 全域變數
-    let currentMainView = 'padlet'; // 'padlet' | 'slides' | 'prompts' | 'demo'
+    // 全域狀態
+    let currentMainView = 'records'; // 預設新分頁 'records'
+    let currentRecordCat = 'all';
     let currentPadletCol = 'all';
     let currentSlideCat = 'all';
     let currentSearchTerm = '';
-    let padletLayout = 'kanban'; // 'kanban' | 'grid'
+    let padletLayout = 'kanban';
     const SECRET_KEY = "049";
 
-    // 密碼驗證
+    // 認證邏輯
     function checkAuth() {
       const auth = sessionStorage.getItem("agy_auth_049");
       if (auth === "true") {
@@ -568,6 +642,7 @@ const htmlContent = `<!DOCTYPE html>
     function unlockUI() {
       document.getElementById("lockScreen").classList.add("hidden");
       renderSubFilterBar();
+      renderTeachingRecords();
       renderPadletBoard();
       renderSlides();
     }
@@ -605,21 +680,23 @@ const htmlContent = `<!DOCTYPE html>
     function switchMainView(view) {
       currentMainView = view;
       document.querySelectorAll('.main-view-btn').forEach(btn => {
-        btn.classList.remove('bg-amber-500', 'text-slate-950', 'bg-blue-600', 'text-white', 'shadow');
+        btn.classList.remove('bg-rose-600', 'bg-amber-500', 'text-slate-950', 'bg-blue-600', 'text-white', 'shadow');
         btn.classList.add('bg-white/10', 'text-white');
       });
 
       const activeBtn = document.getElementById(\`mainView-\${view}\`);
       if (activeBtn) {
         activeBtn.classList.remove('bg-white/10');
-        if (view === 'padlet') {
+        if (view === 'records') {
+          activeBtn.classList.add('bg-rose-600', 'text-white', 'shadow');
+        } else if (view === 'padlet') {
           activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow');
         } else {
           activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
         }
       }
 
-      // 控制顯示
+      document.getElementById('viewRecords').classList.toggle('hidden', view !== 'records');
       document.getElementById('viewPadlet').classList.toggle('hidden', view !== 'padlet');
       document.getElementById('viewSlides').classList.toggle('hidden', view !== 'slides');
       document.getElementById('viewPrompts').classList.toggle('hidden', view !== 'prompts');
@@ -638,7 +715,29 @@ const htmlContent = `<!DOCTYPE html>
       const bar = document.getElementById('subFilterBar');
       bar.innerHTML = '';
 
-      if (currentMainView === 'padlet') {
+      if (currentMainView === 'records') {
+        const cats = [
+          { id: 'all', name: '全部教學紀錄 (25)' },
+          { id: 'video', name: '🎬 現場實錄影片 (1)' },
+          { id: '講座演示', name: '🎤 講座演示 (8)' },
+          { id: '摺紙探究', name: '✂️ 摺紙探究 (5)' },
+          { id: '現場實錄', name: '🏫 現場實錄 (4)' },
+          { id: '交流指導', name: '🤝 交流指導 (4)' },
+          { id: '講義教材', name: '📘 講義教材 (3)' }
+        ];
+        cats.forEach(c => {
+          const btn = document.createElement('button');
+          const isAct = currentRecordCat === c.id;
+          btn.className = \`px-3 py-1.5 rounded-xl whitespace-nowrap transition \${isAct ? 'bg-rose-600 text-white font-bold shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}\`;
+          btn.textContent = c.name;
+          btn.onclick = () => {
+            currentRecordCat = c.id;
+            renderSubFilterBar();
+            renderTeachingRecords();
+          };
+          bar.appendChild(btn);
+        });
+      } else if (currentMainView === 'padlet') {
         const cols = [{ id: 'all', name: '全部專欄 (31)' }, ...PADLET_DATA.sections.map(s => ({ id: s.column, name: \`\${s.column} (\${s.postCount})\` }))];
         cols.forEach(c => {
           const btn = document.createElement('button');
@@ -680,6 +779,110 @@ const htmlContent = `<!DOCTYPE html>
       }
     }
 
+    // 渲染教學紀錄
+    function renderTeachingRecords() {
+      const container = document.getElementById("photosGridContainer");
+      const videoArea = document.getElementById("videoHighlightArea");
+      container.innerHTML = "";
+
+      // 控制影片區域顯示
+      const showVideo = (currentRecordCat === 'all' || currentRecordCat === 'video') && 
+        (!currentSearchTerm || 
+         RECORDS_DATA.video.title.toLowerCase().includes(currentSearchTerm) || 
+         RECORDS_DATA.video.description.toLowerCase().includes(currentSearchTerm) ||
+         '影片'.includes(currentSearchTerm));
+      
+      videoArea.classList.toggle('hidden', !showVideo);
+
+      let count = showVideo ? 1 : 0;
+
+      // 篩選照片
+      const filteredPhotos = RECORDS_DATA.photos.filter(p => {
+        if (currentRecordCat === 'video') return false;
+        if (currentRecordCat !== 'all' && p.category !== currentRecordCat) return false;
+        if (currentSearchTerm) {
+          const s = currentSearchTerm.toLowerCase();
+          const matchTitle = p.title.toLowerCase().includes(s);
+          const matchDesc = p.description.toLowerCase().includes(s);
+          const matchSpeaker = p.speaker.toLowerCase().includes(s);
+          const matchCat = p.category.toLowerCase().includes(s);
+          return matchTitle || matchDesc || matchSpeaker || matchCat;
+        }
+        return true;
+      });
+
+      count += filteredPhotos.length;
+      if (currentMainView === 'records') {
+        document.getElementById('itemCount').textContent = count;
+      }
+
+      if (filteredPhotos.length === 0 && !showVideo) {
+        container.innerHTML = '<div class="col-span-full py-16 text-center text-slate-400 text-sm">找不到相符的教學紀錄照片或影片</div>';
+        return;
+      }
+
+      filteredPhotos.forEach((photo, idx) => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg hover:border-rose-400 transition-all duration-200 flex flex-col justify-between group";
+
+        let catBadgeColor = "bg-slate-100 text-slate-700";
+        if (photo.category === '講座演示') catBadgeColor = "bg-blue-100 text-blue-800";
+        if (photo.category === '摺紙探究') catBadgeColor = "bg-emerald-100 text-emerald-800";
+        if (photo.category === '講義教材') catBadgeColor = "bg-amber-100 text-amber-800";
+        if (photo.category === '交流指導') catBadgeColor = "bg-purple-100 text-purple-800";
+        if (photo.category === '現場實錄') catBadgeColor = "bg-cyan-100 text-cyan-800";
+
+        const photoSrc = \`assets/records/photos/\${photo.filename}\`;
+
+        card.innerHTML = \`
+          <div>
+            <!-- 照片縮圖 (支援 Lightbox 放大) -->
+            <div class="relative overflow-hidden bg-slate-900 cursor-zoom-in aspect-[4/3]" onclick="openLightbox('\${photoSrc}', '\${photo.title.replace(/'/g, "\\\\'")}', '\${photo.description.replace(/'/g, "\\\\'")}')">
+              <img src="\${photoSrc}" alt="\${photo.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+              <div class="absolute top-2.5 left-2.5 flex items-center space-x-1.5">
+                <span class="px-2 py-0.5 \${catBadgeColor} text-[11px] font-bold rounded-md shadow-sm">
+                  \${photo.category}
+                </span>
+                <span class="px-2 py-0.5 bg-black/60 text-white text-[10px] font-medium rounded-md backdrop-blur-sm">
+                  \${photo.time}
+                </span>
+              </div>
+              <div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/60 text-white text-[10px] rounded flex items-center gap-1 backdrop-blur-sm">
+                🔍 點擊放大
+              </div>
+            </div>
+
+            <!-- 照片說明與文字 -->
+            <div class="p-4">
+              <div class="text-[11px] font-semibold text-rose-600 mb-1 flex items-center gap-1">
+                <span>📍 \${photo.speaker}</span>
+              </div>
+              <h5 class="text-sm font-bold text-slate-900 group-hover:text-rose-600 transition mb-2 leading-snug">
+                \${highlightText(photo.title, currentSearchTerm)}
+              </h5>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                \${highlightText(photo.description, currentSearchTerm)}
+              </p>
+            </div>
+          </div>
+
+          <div class="px-4 pb-3 pt-1 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <span>\${photo.orig_name}</span>
+            <span>#\${photo.id}</span>
+          </div>
+        \`;
+        container.appendChild(card);
+      });
+    }
+
+    function playTeachingVideo() {
+      const player = document.getElementById("teachingVideoPlayer");
+      if (player) {
+        player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        player.play();
+      }
+    }
+
     // 切換 Padlet 排版模式
     function togglePadletLayout() {
       padletLayout = padletLayout === 'kanban' ? 'grid' : 'kanban';
@@ -689,7 +892,7 @@ const htmlContent = `<!DOCTYPE html>
       renderPadletBoard();
     }
 
-    // 渲染 Padlet 內容 (包含看板與網格)
+    // 渲染 Padlet 內容
     function renderPadletBoard() {
       const kanbanContainer = document.getElementById('padletKanbanContainer');
       const gridContainer = document.getElementById('padletGridContainer');
@@ -701,7 +904,6 @@ const htmlContent = `<!DOCTYPE html>
       PADLET_DATA.sections.forEach(section => {
         if (currentPadletCol !== 'all' && currentPadletCol !== section.column) return;
 
-        // 篩選 Posts
         const filteredPosts = section.posts.filter(p => {
           if (!currentSearchTerm) return true;
           const s = currentSearchTerm.toLowerCase();
@@ -714,11 +916,9 @@ const htmlContent = `<!DOCTYPE html>
 
         totalVisible += filteredPosts.length;
 
-        // --- 看板欄位 (Kanban Column) ---
         const colCard = document.createElement('div');
         colCard.className = 'flex-shrink-0 w-80 sm:w-96 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col max-h-[85vh]';
 
-        // 欄位標題色彩
         let headerColor = 'bg-slate-800 text-white';
         if (section.column === '講義') headerColor = 'bg-gradient-to-r from-indigo-700 to-blue-700 text-white';
         if (section.column === '互動式評量') headerColor = 'bg-gradient-to-r from-blue-700 to-cyan-700 text-white';
@@ -735,9 +935,7 @@ const htmlContent = `<!DOCTYPE html>
               \${filteredPosts.length}
             </span>
           </div>
-          <div class="p-3 overflow-y-auto space-y-4 kanban-col flex-1 bg-slate-50">
-            <!-- Posts -->
-          </div>
+          <div class="p-3 overflow-y-auto space-y-4 kanban-col flex-1 bg-slate-50"></div>
         \`;
 
         const postsContainer = colCard.querySelector('.kanban-col');
@@ -749,7 +947,6 @@ const htmlContent = `<!DOCTYPE html>
             const cardEl = createPadletPostCard(post, section.column);
             postsContainer.appendChild(cardEl);
 
-            // 網格視圖卡片
             const gridCard = createPadletPostCard(post, section.column, true);
             gridContainer.appendChild(gridCard);
           });
@@ -763,18 +960,16 @@ const htmlContent = `<!DOCTYPE html>
       }
     }
 
-    // 建立 Padlet 單張卡片元件
     function createPadletPostCard(post, colName, isGrid = false) {
       const card = document.createElement('div');
       card.className = \`bg-white rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition p-3.5 flex flex-col justify-between group \${isGrid ? 'shadow-sm' : ''}\`;
 
-      // 圖片區 (使用本機已下載的 assets/padlet/ 路徑)
       let imageHtml = '';
       if (post.images && post.images.length > 0) {
         const cardImg = post.images.find(img => img.type === 'card_image' || img.type === 'photo_attachment' || img.type === 'pdf_thumbnail');
         if (cardImg && cardImg.local_path) {
           imageHtml = \`
-            <div class="relative mb-3 rounded-lg overflow-hidden border border-slate-100 bg-slate-100 cursor-zoom-in" onclick="openLightbox('\${cardImg.local_path}', '\${(post.title || colName).replace(/'/g, "\\\\'")}')">
+            <div class="relative mb-3 rounded-lg overflow-hidden border border-slate-100 bg-slate-100 cursor-zoom-in" onclick="openLightbox('\${cardImg.local_path}', '\${(post.title || colName).replace(/'/g, "\\\\'")}', '\${(post.content || '').substring(0, 100).replace(/'/g, "\\\\'")}')">
               <img src="\${cardImg.local_path}" alt="\${post.title || 'Padlet截圖'}" class="w-full max-h-48 object-cover group-hover:scale-105 transition duration-300" loading="lazy">
               <div class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/60 text-white rounded text-[10px] flex items-center gap-1">
                 🔍 點擊看大圖
@@ -784,7 +979,6 @@ const htmlContent = `<!DOCTYPE html>
         }
       }
 
-      // 連結按鈕
       let linksHtml = '';
       if (post.links && post.links.length > 0) {
         linksHtml = '<div class="flex flex-wrap gap-1.5 mt-3 pt-2.5 border-t border-slate-100">';
@@ -819,7 +1013,6 @@ const htmlContent = `<!DOCTYPE html>
         linksHtml += '</div>';
       }
 
-      // 提示詞複製專區
       let copyBtn = '';
       if (post.content && post.content.length > 80 && (post.content.includes('你是一個') || post.content.includes('我要部署到'))) {
         copyBtn = \`
@@ -832,7 +1025,6 @@ const htmlContent = `<!DOCTYPE html>
 
       card.innerHTML = \`
         <div>
-          <!-- Header: 欄位標籤與發布者 -->
           <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
             <span class="font-medium text-slate-700 flex items-center gap-1">
               👤 \${post.author || '研習教師'}
@@ -840,15 +1032,12 @@ const htmlContent = `<!DOCTYPE html>
             <span class="text-[11px] text-slate-400">\${post.date || ''}</span>
           </div>
 
-          <!-- 標題 -->
           <h5 class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition mb-2">
             \${highlightText(post.title || colName, currentSearchTerm)}
           </h5>
 
-          <!-- 圖片 -->
           \${imageHtml}
 
-          <!-- 內文文字 -->
           <p class="text-xs text-slate-600 whitespace-pre-line leading-relaxed max-h-36 overflow-y-auto">
             \${highlightText(post.content || '', currentSearchTerm)}
           </p>
@@ -886,11 +1075,7 @@ const htmlContent = `<!DOCTYPE html>
       }
 
       if (filtered.length === 0) {
-        container.innerHTML = \`
-          <div class="col-span-full py-16 text-center text-slate-400">
-            <p class="text-base font-medium">找不到相符的投影片步驟</p>
-          </div>
-        \`;
+        container.innerHTML = '<div class="col-span-full py-16 text-center text-slate-400"><p class="text-base font-medium">找不到相符的投影片步驟</p></div>';
         return;
       }
 
@@ -958,6 +1143,7 @@ const htmlContent = `<!DOCTYPE html>
       const clearBtn = document.getElementById("clearSearchBtn");
       clearBtn.classList.toggle("hidden", !term);
 
+      renderTeachingRecords();
       renderPadletBoard();
       renderSlides();
       updateSearchCounts();
@@ -967,13 +1153,16 @@ const htmlContent = `<!DOCTYPE html>
       document.getElementById("searchInput").value = "";
       currentSearchTerm = "";
       document.getElementById("clearSearchBtn").classList.add("hidden");
+      renderTeachingRecords();
       renderPadletBoard();
       renderSlides();
       updateSearchCounts();
     }
 
     function updateSearchCounts() {
-      if (currentMainView === 'padlet') {
+      if (currentMainView === 'records') {
+        renderTeachingRecords();
+      } else if (currentMainView === 'padlet') {
         let count = 0;
         PADLET_DATA.sections.forEach(s => {
           if (currentPadletCol !== 'all' && currentPadletCol !== s.column) return;
@@ -996,9 +1185,10 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     // 圖片 Lightbox
-    function openLightbox(src, caption) {
+    function openLightbox(src, title, caption) {
       document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightboxCaption').textContent = caption;
+      document.getElementById('lightboxTitle').textContent = title || '';
+      document.getElementById('lightboxCaption').textContent = caption || '';
       document.getElementById('imageLightbox').classList.remove('hidden');
       document.getElementById('imageLightbox').classList.add('flex');
     }
@@ -1184,4 +1374,4 @@ const htmlContent = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync(path.join(__dirname, 'index.html'), htmlContent, 'utf-8');
-console.log("Successfully generated index.html with full Padlet board integration!");
+console.log("Successfully rebuilt index.html with Teaching Records tab!");

@@ -1,0 +1,261 @@
+const fs = require('fs');
+const path = require('path');
+
+const teachingRecords = {
+  video: {
+    id: "video_01",
+    title: "李慧玲老師 現場投影示範：AI 提示詞全自動生成評量 APP 實況",
+    speaker: "中央輔導團 李慧玲老師",
+    date: "2026-11-23 14:59",
+    duration: "09:23",
+    src: "assets/records/video/teaching_demo_video.mp4",
+    poster: "assets/records/video/video_poster.jpg",
+    category: "現場實錄影片",
+    description: "本段 9 分 23 秒之實況錄影，完整記錄李慧玲老師在南投國中圖書館現場，親自在大螢幕上示範輸入專業國中數學提示詞（Prompt），由 AI 即時自動編寫並輸出包含 3 個關卡、10 道題目、手寫計算紙畫布、KaTeX 公式渲染與即時回饋之全套互動評量網頁的震撼實況！"
+  },
+  photos: [
+    {
+      id: "photo_01",
+      filename: "record_photo_01.jpg",
+      orig_name: "PXL_20261123_054236276.jpg",
+      time: "13:42",
+      category: "講座演示",
+      title: "研習開場：會考幾何試題與教學策略",
+      speaker: "中央輔導團 李慧玲老師",
+      description: "李慧玲老師於南投國中圖書館為「115 南投縣素養研習」開場引言，剖析國中會考幾何試題趨勢，並說明如何運用數位工具推動學生自主探究。"
+    },
+    {
+      id: "photo_02",
+      filename: "record_photo_02.jpg",
+      orig_name: "PXL_20261123_054500727.jpg",
+      time: "13:45",
+      category: "數位教材",
+      title: "故事化情境導入：神秘的木屋",
+      speaker: "Canva 冒險教具設計",
+      description: "投影大螢幕展示結合 Canva 設計之「神秘的木屋」情境冒險教具，提供 QR Code 讓現場教師立即體驗故事化情境融入數學學習之魅力。"
+    },
+    {
+      id: "photo_03",
+      filename: "record_photo_03.jpg",
+      orig_name: "PXL_20261123_054956762.jpg",
+      time: "13:49",
+      category: "現場實錄",
+      title: "自主學習空間就位與連線準備",
+      speaker: "南投國中 Dream House",
+      description: "參與研習之國中數學教師於南投國中圖書館「Dream House」自主學習空間就位，開啟筆電、平板與手機進行連線準備。"
+    },
+    {
+      id: "photo_04",
+      filename: "record_photo_04.jpg",
+      orig_name: "PXL_20261123_054958756.jpg",
+      time: "13:49",
+      category: "現場實錄",
+      title: "教師專注操作與環境設定",
+      speaker: "研習學員操作實況",
+      description: "現場教師專注於筆電前，開始進入 Gemini Canvas 與 Google Apps Script 雲端環境，依序對齊研習協作牆進行設定。"
+    },
+    {
+      id: "photo_05",
+      filename: "record_photo_05.jpg",
+      orig_name: "PXL_20261123_055037387.jpg",
+      time: "13:50",
+      category: "講義教材",
+      title: "講義指引：貼上程式碼並儲存專案",
+      speaker: "實體操作手冊（第二步）",
+      description: "李慧玲老師精印之紙本手冊特寫：詳細指導 Code.gs 與 Index.html 之建立步驟，特別標註「Index 首字母大寫」與儲存專案磁碟圖示。"
+    },
+    {
+      id: "photo_06",
+      filename: "record_photo_06.jpg",
+      orig_name: "PXL_20261123_055047295.jpg",
+      time: "13:50",
+      category: "講義教材",
+      title: "關鍵指引：發布部署最關鍵的設定",
+      speaker: "實體操作手冊（第三步）",
+      description: "講義關鍵提醒圖解：新增部署作業時，「執行身分」務必選擇「我」，「誰可以存取」務必選擇「所有人」，確保學生端免登入順暢作答。"
+    },
+    {
+      id: "photo_07",
+      filename: "record_photo_07.jpg",
+      orig_name: "PXL_20261123_055340980.jpg",
+      time: "13:53",
+      category: "講座演示",
+      title: "經典範例演示：不只老鼠會打洞",
+      speaker: "李慧玲老師 系統演示",
+      description: "李慧玲老師現場投影演示臺師大數學教育中心奠基模組的 Google Apps Script 雲端互動評量，展示關卡挑戰、即時計分與 Top 10 英雄榜。"
+    },
+    {
+      id: "photo_08",
+      filename: "record_photo_08.jpg",
+      orig_name: "PXL_20261123_061604793.jpg",
+      time: "14:16",
+      category: "講座演示",
+      title: "幾何拼圖互動軟體：方形魔法屋",
+      speaker: "幾何自主學習 APP",
+      description: "演示「方形魔法屋：一起，把可能拼出來！」幾何拼圖系統，透過兩片合一、三片巧接與旋轉平移，啟發學生的空間幾何直覺。"
+    },
+    {
+      id: "photo_09",
+      filename: "record_photo_09.jpg",
+      orig_name: "PXL_20261123_061633613.jpg",
+      time: "14:16",
+      category: "講座演示",
+      title: "面積拼貼理解代數：魔毯工廠",
+      speaker: "因式分解十字交乘大冒險",
+      description: "演示由 Claude Artifacts 生成之「魔毯工廠」，運用正方形與長方形幾何面積拼貼，視覺化直觀推導 x² + 5x + 6 = (x+2)(x+3) 之十字交乘法。"
+    },
+    {
+      id: "photo_10",
+      filename: "record_photo_10.jpg",
+      orig_name: "PXL_20261123_061636486.jpg",
+      time: "14:16",
+      category: "講座演示",
+      title: "遊戲化闖關機制：十字魔法陣",
+      speaker: "遊戲化數學模組",
+      description: "「魔毯工廠」關卡細部展示：十字魔法陣、分解閃電戰、正負雙子星與因式分解大魔王，呈現遊戲化在數學自主學習中的精熟強化設計。"
+    },
+    {
+      id: "photo_11",
+      filename: "record_photo_11.jpg",
+      orig_name: "PXL_20261123_063546757.jpg",
+      time: "14:35",
+      category: "現場實錄",
+      title: "分組實作與課堂專注神情",
+      speaker: "研習課堂實況",
+      description: "現場數學教師們依據手冊指導，動手撰寫提示詞、建立試算表後台並除錯，全神貫注探索生成式 AI 如何賦能日常教學。"
+    },
+    {
+      id: "photo_12",
+      filename: "record_photo_12.jpg",
+      orig_name: "PXL_20261123_065631304.jpg",
+      time: "14:56",
+      category: "講座演示",
+      title: "全員掃碼即時對戰體驗",
+      speaker: "實機連線互動",
+      description: "投影螢幕亮出即時連線 QR Code，現場教師紛紛拿起行動裝置同步登入，實地驗證雲端後台多人即時回傳資料之流暢度。"
+    },
+    {
+      id: "photo_13",
+      filename: "record_photo_13.jpg",
+      orig_name: "PXL_20261123_065743253.jpg",
+      time: "14:57",
+      category: "講座演示",
+      title: "相似形探究：捕光捉影偵探社",
+      speaker: "比例與幾何相似",
+      description: "介紹「捕光捉影偵探社」互動教具：以「用燈光和影子揭開『放大縮小形狀不變』的秘密」為核心，帶領學生探究幾何相似形。"
+    },
+    {
+      id: "photo_14",
+      filename: "record_photo_14.jpg",
+      orig_name: "PXL_20261123_065750611.jpg",
+      time: "14:57",
+      category: "講座演示",
+      title: "光影六大關卡任務架構",
+      speaker: "幾何實驗室",
+      description: "「捕光捉影偵探社」完整闖關架構：胖胖瘦瘦變身秀（等比例拉伸）、影子魔法實驗室、量影子大作戰、倍倍影長任務與縮放繪畫大師。"
+    },
+    {
+      id: "photo_15",
+      filename: "record_photo_15.jpg",
+      orig_name: "PXL_20261123_073719117.jpg",
+      time: "15:37",
+      category: "摺紙探究",
+      title: "實體摺紙幾何探究：三等份正方形",
+      speaker: "李慧玲老師 摺紙推導",
+      description: "李慧玲老師將數位科技轉回手感探究，現場大螢幕示範「三等份正方形 I：摺出上方中點與端點連線」，帶領教師探討尺規作圖外的幾何摺紙。"
+    },
+    {
+      id: "photo_16",
+      filename: "record_photo_16.jpg",
+      orig_name: "PXL_20261123_073720569.jpg",
+      time: "15:37",
+      category: "摺紙探究",
+      title: "探究桌上的摺紙教具與材料",
+      speaker: "實作課桌特寫",
+      description: "研習課桌上擺放鮮豔的彩色正方形摺紙、研習講義與摺疊完成的粉紅幾何模型，展現「做中學、學中思」的數學素養教學真諦。"
+    },
+    {
+      id: "photo_17",
+      filename: "record_photo_17.jpg",
+      orig_name: "PXL_20261123_073729944.jpg",
+      time: "15:37",
+      category: "講義教材",
+      title: "畢氏定理的幾何摺痕：根號螺線",
+      speaker: "貝殼螺線摺紙操作手冊",
+      description: "實體講義「貝殼螺線摺紙步驟」特寫：循序漸進由 1 到 10 步驟，利用等腰直角三角形斜邊逐次構造 √1, √2, √3, √4... 之貝殼螺線。"
+    },
+    {
+      id: "photo_18",
+      filename: "record_photo_18.jpg",
+      orig_name: "PXL_20261123_074017876.jpg",
+      time: "15:40",
+      category: "摺紙探究",
+      title: "深入幾何性質推理：三等份正方形 II",
+      speaker: "投影片推理步驟",
+      description: "投影片提示「將右下角摺至中線後還原」，提出深思問題「即摺出 A、B 兩點的？」，引導現場教師探討摺痕與直角三角形之三邊比關係。"
+    },
+    {
+      id: "photo_19",
+      filename: "record_photo_19.jpg",
+      orig_name: "PXL_20261123_074019789.jpg",
+      time: "15:40",
+      category: "現場實錄",
+      title: "虛實合一：摺紙演算與 AI Canvas",
+      speaker: "雙軌學習實況",
+      description: "課堂動人一幕：前方教師桌上專注推導摺痕，前方筆電則顯示著 Gemini Canvas 正在根據提示詞生成「一元一次方程式」線上互動評量網頁。"
+    },
+    {
+      id: "photo_20",
+      filename: "record_photo_20.jpg",
+      orig_name: "PXL_20261123_074020876.jpg",
+      time: "15:40",
+      category: "摺紙探究",
+      title: "聚精會神：動手摺出數學結構",
+      speaker: "全體學員實作",
+      description: "現場教師們全神貫注摺出貝殼螺線與正方形三等份幾何造型，透過手指觸感具體感受數學定理的內在幾何美感。"
+    },
+    {
+      id: "photo_21",
+      filename: "record_photo_21.jpg",
+      orig_name: "PXL_20261123_075614107.jpg",
+      time: "15:56",
+      category: "交流指導",
+      title: "研習結尾：台前一對一指導與解惑",
+      speaker: "李慧玲老師 課後諮詢",
+      description: "研習告一段落後，李慧玲老師仍留在台前，細心針對個別教師在筆電上遇到的 Apps Script 授權與試算表寫入問題逐一釋疑。"
+    },
+    {
+      id: "photo_22",
+      filename: "record_photo_22.jpg",
+      orig_name: "PXL_20261123_075623587.jpg",
+      time: "15:56",
+      category: "交流指導",
+      title: "活動圓滿收穫滿滿：整理會場",
+      speaker: "助教與學員收拾",
+      description: "助教與熱心學員協助整理研習教具材料、摺紙模型與研習點心餐盒，為充實精采的半日研習劃下美好句點。"
+    },
+    {
+      id: "photo_23",
+      filename: "record_photo_23.jpg",
+      orig_name: "PXL_20261123_075625233.jpg",
+      time: "15:56",
+      category: "交流指導",
+      title: "課後交流：教師同儕共備迴響",
+      speaker: "現場互動交流",
+      description: "課後教師們互道感謝與討論，分享彼此在各校（南投國中、建國國中、福豐國中等）即將推動的數學數位學習試辦構想。"
+    },
+    {
+      id: "photo_24",
+      filename: "record_photo_24.jpg",
+      orig_name: "PXL_20261123_075626578.jpg",
+      time: "15:56",
+      category: "交流指導",
+      title: "研討不休：深厚的教育共備熱忱",
+      speaker: "深入研討",
+      description: "李慧玲老師持續與提問學員圍繞著筆電討論代碼細節，展現輔導團教師無私奉獻、陪伴第一線教師數位轉型的深厚熱忱。"
+    }
+  ]
+};
+
+fs.writeFileSync(path.join(__dirname, 'assets', 'records_data.json'), JSON.stringify(teachingRecords, null, 2), 'utf-8');
+console.log("Successfully generated assets/records_data.json with 24 photos and 1 video!");
